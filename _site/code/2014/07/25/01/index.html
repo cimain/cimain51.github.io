@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>高效设置网络图片</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2014/07/25/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>高效设置网络图片</h1>
+        <p>
+          <h2>2014-07-25</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2014/07/25/01">http://kymjs.com/code/2014/07/25/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        我们都知道，计算机读取数据时：内存的读取速度是最快的，然后是文件的读取速度，最后是网络资源的读取。<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#section">图片的流程</a></li>
+  <li><a href="#section-1">如果您只想了解文件缓存与内存缓存公用，请查看下一篇博文。</a>    <ul>
+      <li><a href="#section-2">深入理解图片加载在实际项目中的应用</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>我们都知道，计算机读取数据时：内存的读取速度是最快的，然后是文件的读取速度，最后是网络资源的读取。</p>
+
+<h3 id="section">图片的流程</h3>
+<p>如果每次加载同一张图片都要从网络获取，那代价实在太大了。所以同一张图片只要从网络获取一次就够了，然后在本地缓存起来，之后加载同一张图片时就 从缓存中加载就可以了。
+从内存缓存读取图片是最快的，但是因为Android对每个应用所能使用的内存容量都有限制，所以最好再加上文件缓存。文件缓存空间也不是无限大的，容量越大读取效率越低，这个很好理解，从沙漠中找出丢失的一根针和从盘子中找到一根针，哪个容易一想即知。因此我们常设置一个限定大小比如10M。</p>
+
+<p>所以，加载图片的流程应该是：
+    1、先从内存缓存中获取，取到则返回，取不到则进行下一步；
+    2、从文件缓存中获取，取到则返回并更新到内存缓存，取不到则进行下一步；
+    3、从网络下载图片，并更新到内存缓存和文件缓存。</p>
+
+<h2 id="section-1">如果您只想了解文件缓存与内存缓存公用，请查看下一篇博文。</h2>
+<p>在过去，我们经常会使用一种非常流行的内存缓存技术的实现，即软引用或弱引用 (SoftReference or WeakReference)。但是根据Google的描述：现在已经不再推荐使用这种方式了，因为从 Android 2.3 (API Level 9)开始，垃圾回收器会更倾向于回收持有软引用或弱引用的对象，这让软引用和弱引用变得不再可靠。另外，Android 3.0 (API Level 11)中，图片的数据会存储在本地的内存当中，因而无法用一种可预见的方式将其释放，这就有潜在的风险造成应用程序的内存溢出并崩溃。</p>
+
+<p>因此，我们更多的是去使用lru算法（Least Recently Used 近期最少使用算法）最初这种算法是用在操作系统调度上的。他的原理是通过个线性表存储数据，并记录数据每次调用次数，越常用到的排名就越靠前，越少用到的排名就越靠后，如果是一个新加入的数据，就会把它放在第一位，然后移除掉排名最后一位的数据。这里是KJFrameForAndroid框架中关于内存lru算法的实现方式 <a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/bitmap/helper/MemoryLruCache.java">LruMemoryCache</a></p>
+
+<p>既然是加载网络图片，那么当然需要加载的控件和网络图片地址作为参数，示例如下所示</p>
+
+<pre><code>private void loadImage(ImageView imageView, String imageUrl) {
+    // 首先访问内存缓存，判断图片是否已经存在
+    Bitmap bitmap = mMemoryCache.get(StringUtils.md5(imageUrl));
+    if (bitmap != null) {
+            imageView.setImageBitmap(bitmap);
+        }else{ 
+        //否则就去网络下载
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+            task.execute(imageUrl);
+    }
+}
+</code></pre>
+
+<p>至于实际下载的方法，我就不详细讲解了，相信大家都能想到，就是一个网络请求，然后下载图片，再转成bitmap，最后设置为控件图片。然而这里有一个需要注意的重要地方，就是当我们把图片下载成功后要记得在mMemoryCache中缓存起来。
+这里是KJFraemForAndroid应用开发框架中的一段网络图片加载的代码：
+        /**
+         * 加载图片（核心方法）
+         * 
+         * @param imageView
+         *            要显示图片的控件(ImageView设置src，普通View设置bg)
+         * @param imageUrl
+         *            图片的URL
+         */
+        private void loadImage(View imageView, String imageUrl) {
+            if (config.callBack != null)
+                config.callBack.imgLoading(imageView);
+            Bitmap bitmap = mMemoryCache.get(StringUtils.md5(imageUrl));
+            if (bitmap != null) {
+                if (imageView instanceof ImageView) {
+                    ((ImageView) imageView).setImageBitmap(bitmap);
+                } else {
+                    imageView.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                }
+                if (config.callBack != null)
+                    config.callBack.imgLoadSuccess(imageView);
+                if (config.isDEBUG)
+                    KJLoger.debugLog(getClass().getName(),
+                            “download success, from memory cache\n” + imageUrl);
+            } else {
+                if (imageView instanceof ImageView) {
+                    ((ImageView) imageView).setImageBitmap(config.loadingBitmap);
+                } else {
+                    imageView.setBackgroundDrawable(new BitmapDrawable(
+                            config.loadingBitmap));
+                }
+                BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+                taskCollection.add(task);
+                task.execute(imageUrl);
+            }
+        }</p>
+
+<pre><code>/********************* 异步获取Bitmap并设置image的任务类 *********************/
+private class BitmapWorkerTask extends AsyncTask&lt;String, Void, Bitmap&gt; {
+    private View imageView;
+ 
+    public BitmapWorkerTask(View imageview) {
+        this.imageView = imageview;
+    }
+ 
+    @Override
+    protected Bitmap doInBackground(String... params) {
+        Bitmap bitmap = null;
+        byte[] res = downloader.loadImage(params[0]);
+        if (res != null) {
+            bitmap = BitmapCreate.bitmapFromByteArray(res, 0, res.length,
+                    config.width, config.height);
+        }
+        if (bitmap != null &amp;&amp; config.openMemoryCache) {
+            // 图片载入完成后缓存到LrcCache中
+            putBitmapToMemory(params[0], bitmap);
+            if (config.isDEBUG)
+                KJLoger.debugLog(getClass().getName(),
+                        "put to memory cache\n" + params[0]);
+        }
+        return bitmap;
+    }
+ 
+    @Override
+    protected void onPostExecute(Bitmap bitmap) {
+        super.onPostExecute(bitmap);
+        if (imageView instanceof ImageView) {
+            if (bitmap != null) {
+                ((ImageView) imageView).setImageBitmap(bitmap);
+            }
+        } else {
+            imageView.setBackgroundDrawable(new BitmapDrawable(bitmap));
+        }
+        if (config.callBack != null)
+            config.callBack.imgLoadSuccess(imageView);
+        taskCollection.remove(this);
+    }
+}
+</code></pre>
+<hr />
+
+<h3 id="section-2">深入理解图片加载在实际项目中的应用</h3>
+<p>以上只是网络图片加载并缓存的基本操作，那么我们如果在实际项目中使用必须考虑到代码的完备性与可扩展性。</p>
+
+<pre><code>①比如我们想指定图片的大小，虽然我们可以通过设置view的固定宽高来强制图片的显示大小，但如果是一张几兆的图片，而我们只需要15*15分辨率大小的显示区域，这显然是浪费的；
+
+②又比如，我们希望控件在网络正在下载图片时先显示一个默认的图片（比如一个灰色的头像）又或者是图片下载的时候显示一个环形的进度条，那么上面的代码是没有办法的；
+
+③再比如，我们希望图片的下载方式有多种，对于不同网站来源有不同的下载方式。。。。
+</code></pre>
+
+<p>这些种种特殊的需求告诉我们，上面的代码完全没有办法做到。那么为了控件的完备性与可扩展性，我们就需要一个配置器、一个显示器、一个下载器。。等等根据特殊需要而添加的插件式开发。</p>
+
+<p>因此，我们可以看到在KJFrameForAndroid框架的org.kymjs.aframe.bitmap包下有着KJBitmapConfig、I_ImageLoder、I_Display等等用final修饰的类或者协议接口。</p>
+
+<p>比如KJBitmapConfig类，是一个用final修饰的配置器类，通过这个配置器，我们就可以动态的对每一张下载的图片设置宽高、以及内存大小等。而I_ImageLoder、I_Display则是两个协议接口，分别定义了下载器和显示器的方法，这里实际上是GoF设计模式中工厂方法模式的应用，只是这里的工厂实际上并不是用来创建对象，而是用来定义显示方法或下载方法的，不论是哪个实现了I_ImageLoder抽象工厂的实际工厂，都必须有一个加载图片的方法。那么在项目的实际应用中，就可以不管这个下载器的实际工厂是什么，只需要调用工厂的加载图片的方法就行了。</p>
+
+<pre><code>/**
+ * 图片载入接口协议，可自定义实现此协议的下载器
+ * 
+ * @explain 采用工厂方法模式设计的下载器，本类也是一个抽象工厂类，用于生产byte[]产品
+ * @author kymjs(kymjs123@gmail.com)
+ * @version 1.0
+ * @created 2014-7-11
+ */
+public interface I_ImageLoder {
+    public byte[] loadImage(String imageUrl);
+ 
+}
+</code></pre>
+
+<p>这里我们应该就可以知道上面的代码段中有这么一段代码原因了 
+    byte[] res = downloader.loadImage(params[0]);
+    downloader实际上就是下载器的抽象工厂。</p>
+
+<p>至于显示器的逻辑和下载器是一样的，这里我就不详细介绍了，大家可以自己查看KJFrameForAndroid的源代码或示例项目。</p>
+
+<p>这里是I_ImageLoader下载器协议的一个实现类 <a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/bitmap/BitmapDownloader.java">Downloader.java</a>，大家当然也可以根据自己的需要去实现自己的下载器，这完全没有任何作为扩展试开发，这对于图片设置代码本身没有任何影响。</p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2014/07/25/01" data-title="高效设置网络图片" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2014/07/25/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2014-07-25-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

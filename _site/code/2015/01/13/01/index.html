@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Android最方便的推送框架</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2015/01/13/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>Android最方便的推送框架</h1>
+        <p>
+          <h2>2015-01-13</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2015/01/13/01">http://kymjs.com/code/2015/01/13/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        本文主要讲在Android中实现推送方式的底层原理与推送的知识及相关解决方案。<br>
+        <h2>正文</h2>
+        
+<p>
+最近一个月一直在考虑实现一种让Android开发者一个人就能完成的推送功能库。因为现有的推送功能，全部都需要服务器端配合，不断测试，即使使用第三方库也需要很长一段时间的测试。这里就是我最近研究的一个小小的成果：<a href="http://git.oschina.net/kymjs/KJPush" target="_self" rel="nofollow">http://git.oschina.net/kymjs/KJPush</a>
+</p>
+<p>
+推送功能在Android应用开发中已经非常普遍了，本文就是来探讨下Android中推送的底层原理与实现推送功能的一些解决方案。
+</p>
+<p>
+1、什么是推送？
+</p>
+<p>
+&nbsp;&nbsp; &nbsp; 当我们开发需要和服务器交互的应用程序时，基本上都需要获取服务器端的数据，比如开源中国客户端，在有人评论或回复你的时候，客户端需要知道，并作出相应处理。要获取服务器上的信息，有两种方法：第一种是客户端使用Pull（拉）的方式，就是隔一段时间就去服务器上获取一下信息，看是否有更新的信息出现。第二种就是服务器使用Push（推送）的方式，当服务器端有新信息了，则把最新的信息Push到客户端上。这样，客户端就能自动的接收到消息。
+</p>
+<p>
+<span style="line-height: 22.5px;">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;Push是服务端主动发消息给客户端，<span style="line-height: 22.5px;">现在有很多第三方推送框架：例如百度推送、极光推送、个推等等，都是基于之前说的第二种方式也就是服务器使用Push的方式。</span>因为第一时间知道数据发生变化的是服务器自己，所以Push的优势是实时性高。但服务器主动推送需要单独开发一套能让客户端持久连接的服务端程序。但有些情况下并不需要服务端主动推送，而是在一定的时间间隔内客户端主动发起查询，这种时候就应该使用Pull的方式去获取。</span><span style="font-size: 12.5px;">很多人认为Push方式没有任何消耗，其实不然采用Push方式需要长时间维持一条客户端与服务器端通信的socket长连接，依旧是很费流量与电量。如果轮询策略配置的好，消耗的电与数据流量绝不比维持一个socket连接使用的多。</span><span style="font-size: 12.5px;">譬如有这样一个app，实时性要求不高，每天只要能获取10次最新数据就能满足要求了，这种情况显然轮询更适合一些，推送显得太浪费，而且更耗电。</span>
+</p>
+<p>
+<span style="font-size: 12.5px;">2、如何实现轮询请求</span>
+</p>
+<p>
+第一种方式是在一个Service中创建一个计时器，如下代码是在网上找的一段类似实现（节选）
+</p>
+<pre class="brush:java;toolbar: true; auto-links: false;">/**
+* 短信推送服务类，在后台长期运行，每个一段时间就向服务器发送一次请求
+* @author jerry
+*/
+public class PushSmsService extends Service {
+
+@Override
+public void onCreate() {
+this.client = new AsyncHttpClient();
+this.myThread = new MyThread();
+this.myThread.start();
+super.onCreate();
+}
+
+private class MyThread extends Thread {
+@Override
+public void run() {
+String url = &quot;你请求的网络地址&quot;;
+while (flag) {
+// 每个10秒向服务器发送一次请求
+Thread.sleep(10000);
+// 采用get方式向服务器发送请求
+client.get(url, new AsyncHttpResponseHandler() {
+@Override
+public void onSuccess(int statusCode, Header[] headers,
+byte[] responseBody) {
+try {
+JSONObject result = new JSONObject(new String(
+responseBody, &quot;utf-8&quot;));
+int state = result.getInt(&quot;state&quot;);
+// 假设偶数为未读消息
+if (state % 2 == 0) {
+String content = result.getString(&quot;content&quot;);
+String date = result.getString(&quot;date&quot;);
+String number = result.getString(&quot;number&quot;);
+notification(content, number, date);
+}
+} catch (Exception e) {
+e.printStackTrace();
+}
+}
+}</pre>
+<p></p>
+<p>
+但是用Sleep，TimerTask，都会增大Service被系统回收的可能，更合适的方法是使用<span style="color: rgb(51, 51, 51); font-family: Helvetica, &#39;microsoft yahei&#39;, Arial, sans-serif; font-size: 14px; line-height: 22.3999996185303px; background-color: rgb(255, 255, 255);">AlarmManager</span>这个系统的计时器去管理。
+</p>
+<p>
+实现方法如下，你可以在<a href="http://git.oschina.net/kymjs/KJPush/blob/master/KJPush/src/org/kymjs/push/core/PullService.java" target="_self" rel="nofollow">这里</a>看到完整的实现方式
+</p>
+<pre class="brush:java;toolbar: true; auto-links: false;">private void startRequestAlarm() {
+cancelRequestAlarm();
+// 从1秒后开始，每隔2分钟执行getOperationIntent()
+// 注意，这个2分钟只是正常情况下的2分钟，实际情况可能不同系统的处理策略而被延长，比如坑爹的粗粮系统上可能被延长至5分钟
+mAlarmMgr.setRepeating(AlarmManager.RTC_WAKEUP,
+System.currentTimeMillis() + 1000, KJPushConfig.PALPITATE_TIME,
+getOperationIntent());
+}
+
+/**
+* 即使启动PendingIntent的原进程结束了的话,PendingIntent本身仍然还存在，可在其他进程（
+* PendingIntent被递交到的其他程序）中继续使用.
+* 如果我在从系统中提取一个PendingIntent的，而系统中有一个和你描述的PendingIntent对等的PendingInent,
+* 那么系统会直接返回和该PendingIntent其实是同一token的PendingIntent，
+* 而不是一个新的token和PendingIntent。然而你在从提取PendingIntent时，通过FLAG_CANCEL_CURRENT参数，
+* 让这个老PendingIntent的先cancel()掉，这样得到的pendingInten和其token的就是新的了。
+*/
+private void cancelRequestAlarm() {
+mAlarmMgr.cancel(getOperationIntent());
+}
+
+/**
+* 采用轮询方式实现消息推送&lt;br&gt;
+* 每次被调用都去执行一次{@link #PushReceiver}onReceive()方法
+* 
+* @return
+*/
+private PendingIntent getOperationIntent() {
+Intent intent = new Intent(this, PushReceiver.class);
+intent.setAction(KJPushConfig.ACTION_PULL_ALARM);
+PendingIntent operation = PendingIntent.getBroadcast(this, 0, intent,
+PendingIntent.FLAG_UPDATE_CURRENT);
+return operation;
+}</pre>
+<p></p>
+<p>
+这样就可以在最大程度上解决因为自己实现计时器造成的计时不准确或计时器被系统回收的问题。<br />
+</p>
+<p>
+但是仅仅这样还没办法实现一个完善且稳定的轮询推送库，做推送最大的问题有三个：电量消耗，数据流量消耗，服务持久化。
+</p>
+<p>
+3、电量消耗优化与数据流量消耗优化：
+</p>
+<p>
+这两个问题其实可以合并成一个问题，因为请求服务器其实也是一个费电的事情。与维持一个长连接类似，要实现推送功能，不管是维持一个长连接或者是定时请求服务器都需要耗费网络数据流量，而只不过长连接是一个细水长流不断耗费，而轮询是一次一大断数据的耗费。这样就需要一种可行的策略去配置，让轮询按照我们想要的方式去执行。目前我采用的思路是当手机处于GPRS模式时降低轮询的频率，每5分钟请求一次服务器，当手机处于WiFi模式时每2分钟请求一次服务器，同时设置如果熄灭屏幕则停止推送请求，当屏幕熄灭20秒后杀死推送进程，这样不仅不需要考虑维护一个进程的消耗同时也节省了数据流量的使用。
+</p>
+<p>
+4、服务持久化
+</p>
+<p>
+相信这是一个很多人都遇到的问题，网上也有很多类似的问题，像QQ微信这种应用做的就非常好，不管使用第三方手机助手或者使用系统停止一个应用(不是设置里面的那种停止，是长按Home键的那种)，后台Service都不会被回收。很可惜，我目前只能做到保证一个Service不被第三方手机助手回收，可以防止部分手机长按Home键停止，但是例如粗粮的MIUI系统，依旧会杀死我的Service且无法恢复。目前为止我依旧没有找到一个公开的完美解决办法，如果你知道如何解决，请不吝指教。下面我就简单讲讲如何最大程度的维护一个Service。
+</p>
+<p>
+以前在做音乐播放器的时候，相信很多人都遇到了，在应用开启过多的时候，后台播放音乐的Service独立进程会被系统杀死。
+</p>
+<p>
+在Android的ActivityManager中有一个内部类<span style="line-height: 22.5px;">RunningAppProcessInfo，用来记录当前系统中进程的状态，如下是其中的一些值：</span>
+</p>
+<pre class="brush:java;toolbar: true; auto-links: false;">       /**
+* Constant for {@link #importance}: this is a persistent process.
+* Only used when reporting to process observers.
+* @hide
+*/
+public static final int IMPORTANCE_PERSISTENT = 50;
+
+/**
+* Constant for {@link #importance}: this process is running the
+* foreground UI.
+*/
+public static final int IMPORTANCE_FOREGROUND = 100;
+
+/**
+* Constant for {@link #importance}: this process is running something
+* that is actively visible to the user, though not in the immediate
+* foreground.
+*/
+public static final int IMPORTANCE_VISIBLE = 200;
+
+/**
+* Constant for {@link #importance}: this process is running something
+* that is considered to be actively perceptible to the user.  An
+* example would be an application performing background music playback.
+*/
+public static final int IMPORTANCE_PERCEPTIBLE = 130;
+
+/**
+* Constant for {@link #importance}: this process is running an
+* application that can not save its state, and thus can&#39;t be killed
+* while in the background.
+* @hide
+*/
+public static final int IMPORTANCE_CANT_SAVE_STATE = 170;
+
+/**
+* Constant for {@link #importance}: this process is contains services
+* that should remain running.
+*/
+public static final int IMPORTANCE_SERVICE = 300;
+
+/**
+* Constant for {@link #importance}: this process process contains
+* background code that is expendable.
+*/
+public static final int IMPORTANCE_BACKGROUND = 400;
+
+/**
+* Constant for {@link #importance}: this process is empty of any
+* actively running code.
+*/
+public static final int IMPORTANCE_EMPTY = 500;</pre>
+<p></p>
+<p>
+一般数值大于RunningAppProcessInfo.IMPORTANCE_SERVICE的进程都长时间没用或者空进程了
+</p>
+<p>
+一般数值大于RunningAppProcessInfo.IMPORTANCE_VISIBLE的进程都是非可见进程，也就是在后台运行着
+</p>
+<p>
+第三方清理软件清理的一般是大于IMPORTANCE_VISIBLE的值，所以要想不被杀死就需要将自己的进程降低到<span style="line-height: 22.5px;">IMPORTANCE_VISIBLE</span>以下，也就是可见进程的程度。在每一个Service中有一个方法叫startForeground,也就是以可见进程的模式启动，这里是在SDK源码中的实现与注释，可以看到，它会在通知栏持续显示一个通知，但只需要将id传为0即可避免通知的显示。当然要取消这种可见进程等级的设置只需要调用stopForgeround即可。
+</p>
+<pre class="brush:java;toolbar: true; auto-links: false;">/**
+* Make this service run in the foreground, supplying the ongoing
+* notification to be shown to the user while in this state.
+* By default services are background, meaning that if the system needs to
+* kill them to reclaim more memory (such as to display a large page in a
+* web browser), they can be killed without too much harm.  You can set this
+* flag if killing your service would be disruptive to the user, such as
+* if your service is performing background music playback, so the user
+* would notice if their music stopped playing.
+*/
+public final void startForeground(int id, Notification notification) {
+try {
+mActivityManager.setServiceForeground(
+new ComponentName(this, mClassName), mToken, id,
+notification, true);
+} catch (RemoteException ex) {
+}
+}</pre>
+<p></p>
+<p>
+这里由于篇幅有限就讲这么多了，希望详细了解进程优先级提升的可以看看ActivityManager源码中的定义以及KJPush中的实现方式。
+</p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2015/01/13/01" data-title="Android最方便的推送框架" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2015/01/13/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2015-01-13-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

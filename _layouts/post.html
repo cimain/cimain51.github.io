@@ -1,0 +1,53 @@
+---
+layout: default
+---
+<div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>{{ page.title }}</h1>
+        <p>
+          <h2>{{ page.date | date: "%Y-%m-%d" }}</h2>
+          {% if page.author %} • {{ page.author }}{% endif %}
+          {% if page.meta %} • {{ page.meta }}{% endif %}
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com{{ page.url }}">http://kymjs.com{{ page.url }}</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        {{ page.description }}<br>
+        <h2>正文</h2>
+        {{content}}
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="{{ page.url }}" data-title="{{ page.title }}" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com{{ page.url }}"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/{{ page.date | date: "%Y-%m-%d" }}-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>

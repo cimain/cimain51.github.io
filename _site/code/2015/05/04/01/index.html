@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>深入讲解WebView——下</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2015/05/04/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>深入讲解WebView——下</h1>
+        <p>
+          <h2>2015-05-04</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2015/05/04/01">http://kymjs.com/code/2015/05/04/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        作为Android开发者，我们都知道在手机中内置了一款高性能 webkit 内核浏览器,在 SDK 中封装为一个叫做 WebView 组件。今天就为大家讲讲Android中WebView的详细使用方法<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#webview-">判断 WebView 是否已经滚动到页面底端</a></li>
+  <li><a href="#webview-session-">WebView获取服务器中的 session 问题</a></li>
+  <li><a href="#webviewcookies">WebView清除本地cookies</a></li>
+  <li><a href="#section">讲一个案例</a></li>
+  <li><a href="#section-1">相关解答</a></li>
+</ul>
+
+<p>接上一篇博客【<a href="http://blog.kymjs.com/code/2015/05/03/01/">深入讲解WebView上</a>】</p>
+
+<h2 id="webview-">判断 WebView 是否已经滚动到页面底端</h2>
+<p>在View中有一个getScrollY()方法，可以返回当前可见区域的顶端距整个页面顶端的距离,也就是当前内容滚动的距离。<br />
+还有getHeight()或者 getBottom()方法都返回当前 View 这个容器的高度<br />
+在ViewView中还有getContentHeight() 方法可以返回整个 html 页面的高度,但并不等同于当前整个页面的高度 ,因为 WebView 有缩放功能。你可以通过如下代码来启动或关闭webview的缩放功能。<br /></p>
+
+<div class="highlight"><pre><code class="java"><span class="n">mWebView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setSupportZoom</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">mWebView</span><span class="o">.</span><span class="na">getSettings</span><span class="o">().</span><span class="na">setBuiltInZoomControls</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</code></pre></div>
+
+<p>所以当前整个页面的高度实际上应该是原始 html 的高度再乘上缩放比例. 因此,更正后的结果 ,准确的判断方法应该是:<br /></p>
+
+<div class="highlight"><pre><code class="java"> <span class="c1">// 如果已经处于底端</span>
+<span class="k">if</span><span class="o">(</span><span class="n">WebView</span><span class="o">.</span><span class="na">getContentHeight</span><span class="o">*</span><span class="n">WebView</span><span class="o">.</span><span class="na">getScale</span><span class="o">()</span> <span class="o">-(</span><span class="n">webvi</span> <span class="n">ew</span><span class="o">.</span><span class="na">getHeight</span><span class="o">()+</span><span class="n">WebView</span><span class="o">.</span><span class="na">getScrollY</span><span class="o">())){</span> 
+  <span class="c1">//XXX</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="webview-session-">WebView获取服务器中的 session 问题</h2>
+<p>接下来我们讲如下两个问题：<br />
+1、Android 中的 WebView 如何获取服务器页面的 jsessionid 的值<br />
+2、Android 的 WebView 又是如何把得到的 jsessionid 的值在 set 到服务器中,一致达到他们在同一个 jsessionid 的回话中.<br />
+其实非常非常简单，只不过是几个方法罢了:<br /></p>
+
+<div class="highlight"><pre><code class="java"><span class="n">CookieManager</span> <span class="n">cm</span> <span class="o">=</span> <span class="n">CookieManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span> 
+<span class="n">cm</span><span class="o">.</span><span class="na">removeAllCookie</span><span class="o">();</span>
+<span class="n">cm</span><span class="o">.</span><span class="na">getCookie</span><span class="o">(</span><span class="n">url</span><span class="o">);</span>
+<span class="n">cm</span><span class="o">.</span><span class="na">setCookie</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">cookie</span><span class="o">);</span>
+</code></pre></div>
+
+<p>另外还有个 CookieSyncManager,也许你会在一些旧的项目中看到它。从名字来理解，它实际上应该是一个异步缓存器。不过我们看到这个方法已经被标记为过时了，查看源码可以看到过时原因是现在WebView已经是自动的异步缓存了，所以这个类已经没有存在的意义了。
+<a href="http://blog.kymjs.com/"><img src="http://blog.kymjs.com/images/blog_image/20150504_1.png" alt="CookieSyncManager" /></a></p>
+
+<h2 id="webviewcookies">WebView清除本地cookies</h2>
+<p>在使用网页版淘宝或百度登录时,WebView会自动登录上次的帐号!(因为WebView 记录了帐号和密码的cookies) 所以,需要清除 SessionCookie也是有必要的。<br />
+那么CookieManager同样也为我们提供了清除cookie的方法 <br />
+CookieManager.getInstance().removeSessionCookie();<br /></p>
+
+<p>这里顺便说一下WebView本身也是会记录html缓存的，上一篇博客中我讲了一种通过文件操作去清理缓存的方法，后来我又发现，其实webview本身就提供了清理缓存的方法，其中参数true是指是否包括磁盘文件也一并清除，传true就和我们昨天的讲的效果是一样的了：<br /></p>
+
+<div class="highlight"><pre><code class="java"><span class="n">webview</span><span class="o">.</span><span class="na">clearCache</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">webview</span><span class="o">.</span><span class="na">clearHistory</span><span class="o">();</span>
+</code></pre></div>
+
+<h2 id="section">讲一个案例</h2>
+<p>讲了这么多的理论知识，最后讲一个使用案例。WebView在实际使用中可以分为两种使用方法，第一种就是类似于QQ微信那种，使用loadUrl直接去显示一个链接，这种方式太简单了，传一个url就行，我就不多说了。<br />
+那么需要详细讲的是第二种，类似的实现大家可以看看开源中国客户端，网易新闻客户端，爱看博客，等客户端的实现方式，它们实际上也是通过webview来显示的一个网页内容，但是并不是单纯的loadurl,而是以字符串的形式去加载一个已经获取到了的html源代码。这样做的好处在于显示的页面可以完全的根据自己喜好来定义，比如我想在末尾添加一张图片，那么简单，在这个html字符串的末尾插入一个img标签就可了。至于使用方法，其实我们在上一篇博客的时候有提到过：</p>
+
+<p>myWebView.loadData(htmlText,”text/html”, “utf-8”);</p>
+
+<p>其中htmltext就是我们需要加载的html字符串，使用这个方法可以直接将这个字符串作为网页来显示。<br />
+最后总结一下两种方法的适用场景，前一种载入链接的方法适合一个界面(Activity或Fragment)只有一个WebView或者说WebView占很大一块的时候，同时我们要显示的内容是未知的，那么自然是使用loadurl方法更合适，例如QQ聊天的时候对方发送一条链接，当QQ解析出这个文本是一个网址时就通过webview去加载它。而后一种则适合于定制化内容，一般是那种你可以明确的制度网页内容以及要显示的内容时使用，至于好处就是上面说的，定制性要好很多。<br /></p>
+
+<h2 id="section-1">相关解答</h2>
+<p>关于上一篇博客，有朋友问我如何实现web调用手机摄像头。很遗憾我不是做web的，对这块不是很懂。不过我建议你看一下开源中国的html5手机版的发布动弹那里，点击选择文件以后，会自动弹出相机选项，不知道可以可行。<a href="http://m.oschina.net/my/new-tweet">http://m.oschina.net/my/new-tweet</a><br />
+<a href="http://blog.kymjs.com/"><img src="http://blog.kymjs.com/images/blog_image/20150504_2.png" alt="osc" /></a><br /></p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2015/05/04/01" data-title="深入讲解WebView——下" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2015/05/04/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2015-05-04-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

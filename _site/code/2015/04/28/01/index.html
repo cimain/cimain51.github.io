@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>通用Adapter与ListView滚动时不加载图片的封装</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2015/04/28/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>通用Adapter与ListView滚动时不加载图片的封装</h1>
+        <p>
+          <h2>2015-04-28</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2015/04/28/01">http://kymjs.com/code/2015/04/28/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        介绍一个通用的Adapter实现，和对ListView滚动时不加载图片的封装。<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#section">初步抽取</a></li>
+  <li><a href="#viewholder">封装ViewHolder</a></li>
+  <li><a href="#section-1">最终的封装</a></li>
+  <li><a href="#section-2">最后的总结</a></li>
+</ul>
+
+<p>在Android开发中写Adapter是一件非常麻烦的事情，枯燥重复，却又不得不去做。
+对于Adapter一般都继承BaseAdapter复写几个方法，getView里面使用ViewHolder存储，其实大部分的代码都是类似的。那么本文就带大家一起做一次将Adapter封装成一个通用的Adapter。<br />
+关于本文的完整Demo，可以参考KJFrameForAndroid开发框架2.2版本中封装的实例，<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/KJAdapter.java">KJAdapter</a>和<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/AdapterHolder.java">AdapterHolder</a>这两个类。<br />
+那么接下来我们进入正文，下面这个类似的代码应该是我们看的最多的：</p>
+
+<pre><code>public class EmojiGridAdapter extends BaseAdapter {
+
+    private List&lt;Emojicon&gt; datas;
+    private final Context cxt;
+
+    public EmojiGridAdapter(Context cxt, List&lt;Emojicon&gt; datas) {
+        this.cxt = cxt;
+        if (datas == null) {
+            datas = new ArrayList&lt;Emojicon&gt;(0);
+        }
+        this.datas = datas;
+    }
+
+    public void refresh(List&lt;Emojicon&gt; datas) {
+        if (datas == null) {
+            datas = new ArrayList&lt;Emojicon&gt;(0);
+        }
+        this.datas = datas;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getCount() {
+        return datas.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    private static class ViewHolder {
+        ImageView image;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            ......
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.image.setImageResource(datas.get(position).getResId());
+        return convertView;
+    }
+}
+</code></pre>
+
+<h3 id="section">初步抽取</h3>
+
+<p>其中BaseAdapter的四个方法必须写，但是基本上前三个都是一模一样的，
+所以可以使用泛型，写一个基类出来，把数据封装到基类里面，只需要构造方法传入就行了</p>
+
+<pre><code>public class KJBaseAdapter&lt;T&gt; extends BaseAdapter {
+	List&lt;T&gt; datas;
+ 
+	KJBaseAdapter(Context cxt,List&lt;T&gt; datas){
+		......
+	}
+
+	@Override
+    public int getCount() {
+        return datas.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+}
+</code></pre>
+
+<p>然后是我们唯一需要动脑的getView()方法，首先是判断converView是否空，然后载入item布局，然后ViewHolder挨个初始化控件，然后通过tag保存holder，最后设置View的显示。<br />
+步棸都知道了，那么我们慢慢来观察：ViewHolder一定是包含了item子控件的一个静态类。那么我们就干脆把item所有的子控件都放到ViewHolder里面，但是既然我们要通用，item肯定不是固定的，这就没办法把ViewHolder写的像上面的那种属性的形式。<br />
+这里我们使用一个键值对来存储Map&lt;id, view&gt;全部的控件，这样就可以在需要的时候直接通过id来找到对应的子View了。</p>
+
+<pre><code>mViews = new Map&lt;Integaer, View&gt;();
+
+/**
+ * 通过控件的Id获取对于的控件，如果没有则加入views
+ * 
+ * @param viewId
+ * @return
+ */
+public &lt;T extends View&gt; T getView(int viewId) {
+    View view = mViews.get(viewId);
+    if (view == null) {
+        view = mConvertView.findViewById(viewId);
+        mViews.put(viewId, view);
+    }
+    return (T) view;
+}
+</code></pre>
+
+<h3 id="viewholder">封装ViewHolder</h3>
+
+<p>只看getView，其他方法都一样；首先调用ViewHolder的get方法，如果convertView为null，new一个ViewHolder实例，通过使用mInflater.<br />inflate加载布局，然后new一个HashMap用于存储View，最后setTag(this)；
+如果存在那么直接getTag最后通过getView(id)获取控件，如果存在则直接返回，否则调用findViewById，返回存储，返回。<br /><br /></p>
+
+<p>那么最后封装好的ViewHolder就是这样的<br /></p>
+
+<pre><code>public class AdapterHolder {
+    private final Map&lt;Integer,View&gt; mViews;
+    private final int mPosition;
+    private final View mConvertView;
+
+    private AdapterHolder(ViewGroup parent, int layoutId, int position) {
+        this.mPosition = position;
+        this.mViews = new HashMap&lt;Integer, View&gt;();
+        mConvertView = LayoutInflater.from(parent.getContext()).inflate(
+                layoutId, parent, false);
+        // setTag
+        mConvertView.setTag(this);
+    }
+
+    /**
+     * 拿到一个ViewHolder对象
+     */
+    public static AdapterHolder get(View convertView, ViewGroup parent,
+            int layoutId, int position) {
+        if (convertView == null) {
+            return new AdapterHolder(parent, layoutId, position);
+        } else {
+            return (AdapterHolder) convertView.getTag();
+        }
+    }
+
+    /**
+     * 通过控件的Id获取对于的控件，如果没有则加入views
+     * 
+     * @param viewId
+     * @return
+     */
+    public &lt;T extends View&gt; T getView(int viewId) {
+        View view = mViews.get(viewId);
+        if (view == null) {
+            view = mConvertView.findViewById(viewId);
+            mViews.put(viewId, view);
+        }
+        return (T) view;
+    }
+}
+</code></pre>
+
+<p>结合前面的基类，我们的Adapter就变成了这样的</p>
+
+<pre><code>public class EmojiGridAdapter&lt;T&gt; extends KJBaseAdapter&lt;T&gt; {  
+  
+    @Override  
+    public View getView(int position, View convertView, ViewGroup parent){  
+        ViewHolder viewHolder = ViewHolder.get(mContext, convertView, parent,  
+                R.layout.item_single_str, position);  
+        TextView mTitle = viewHolder.getView(R.id.id_tv_title);  
+        mTitle.setText((String) mDatas.get(position));  
+        return viewHolder.getConvertView();  
+    }  
+}  
+</code></pre>
+
+<h3 id="section-1">最终的封装</h3>
+
+<p>再仔细观察，第一行的ViewHolder.get()和最后一行的return方法肯定也是不变的，果断进一步封装。<br />
+那么就完全可以是只需要抽出getView中可变的部分————通过ViewHolder把View找到，通过Item设置值；这一块单独写出来了。那么我们写一个方法就叫convert()来做这件事。至此代码简化到这样，剩下的已经不需要单独写一个Adapter了，直接Activity匿名内部类足够了。</p>
+
+<pre><code>protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    setContentView(R.layout.activity_main);  
+    mListView = (ListView) findViewById(R.id.id_lv_main);  
+  
+    //设置适配器  
+    mListView.setAdapter(mAdapter = new CommonAdapter&lt;String&gt;(  
+            getApplicationContext(), mDatas, R.layout.item_single_str) {  
+        @Override  
+        public void convert(ViewHolder c, String item) {  
+            TextView view = viewHolder.getView(R.id.id_tv_title);  
+            view.setText(item);  
+        }  
+    });  
+}  
+</code></pre>
+
+<h3 id="section-2">最后的总结</h3>
+
+<p>现在我们再来对比<a href="http://github.com/kymjs/KJFrameForAndroid">KJFrameForAndroid</a>中的封装，可以看到使用了SparseArray<view>来替代我们的Map，SparseArray实际上就是一个拥有两个数组的类，第一个数组是一个int[]，用来当做key，第二个就是泛型这里使用的是View[]，它是google推荐用来替代int作为key的Map集合的一个类。<br /></view></p>
+
+<p>还有一个细节就是KJFrameForAndroid中的封装，加入了一个absListView属性，并设置了滚动监听，这样就可以很方便的在基类中实现例如listview滚动过程中不加载图片等功能。</p>
+
+<p>最后我们封装好以后的代码：就可以直接查看<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/KJAdapter.java">KJAdapter</a>和<a href="https://github.com/kymjs/KJFrameForAndroid/blob/master/KJFrame/src/org/kymjs/kjframe/widget/AdapterHolder.java">AdapterHolder</a>这两个类。
+以及使用方法可以参考KJBlog中的使用，例如：<a href="https://github.com/KJFrame/KJBlog/blob/master/KJBlog/src/org/kymjs/blog/adapter/BlogAuthorAdapter.java">这里</a></p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2015/04/28/01" data-title="通用Adapter与ListView滚动时不加载图片的封装" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2015/04/28/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2015-04-28-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+[
+    {
+        "id": "16",
+        "title": "Android流式布局实现",
+        "url": "http://blog.kymjs.com/code/2015/06/06/01/",
+        "imageUrl":"",
+        "date":"2015-06-06 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "新项目用到了一种全新布局————Android标签流式布局的功能，正好一直说给大家讲自定义控件的实现，今天就为大家讲一种android流式布局的实现。 "
+    },
+    {
+        "id": "15",
+        "title": "Android夜间模式实现",
+        "url": "http://blog.kymjs.com/code/2015/05/26/01/",
+        "imageUrl":"",
+        "date":"2015-05-26 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "最近在做一个Android夜间模式的功能，又重新研究了一下Theme机制。贯彻我的风格，以解决问题为目标，写了个小Demo，简单了实现了切换夜间模式，为大家讲解。 "
+    },
+    {
+        "id": "14",
+        "title": "如何在安卓应用程序中保存数据",
+        "url": "http://blog.kymjs.com/code/2015/05/24/01/",
+        "imageUrl":"",
+        "date":"2015-05-24 16:15:25",
+        "isRecommend":0,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "一些日常总结的笔记与经验~ "
+    },
+    {
+        "id": "13",
+        "title": "迄今最好的Http请求框架使用讲解",
+        "url": "http://blog.kymjs.com/kjframeforandroid/2015/05/12/01",
+        "imageUrl":"",
+        "date":"2015-05-12 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "详细讲述KJFrameForAndroid的网络请求模块工作原理与使用方法"
+    },
+    {
+        "id": "12",
+        "title": "使用框架帮助Activity规范化",
+        "url": "http://blog.kymjs.com/kjframeforandroid/2015/05/10/01",
+        "imageUrl":"",
+        "date":"2015-05-10 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "写给那些在用、想用、还没有用过KJFrame的朋友。 KJFrameForAndroid总共分为四个功能：Activity继承链的规范，Http数据请求和上传下载，Bitmap大图加载以及ListView滚动时只加载内存图片，数据库对象存储与集合对象存储。还有一个独立出来的功能CJFrame插件化开发框架，支持启动在你的手机中未安装的apk应用。"
+    },
+    {
+        "id": "11",
+        "title": "深入讲解WebView——下",
+        "url": "http://blog.kymjs.com/code/2015/05/04/01",
+        "imageUrl":"",
+        "date":"2015-05-04 16:15:25",
+        "isRecommend":0,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "作为Android开发者，我们都知道在手机中内置了一款高性能 webkit 内核浏览器,在 SDK 中封装为一个叫做 WebView 组件。今天就为大家讲讲Android中WebView的详细使用方法"
+    },
+    {
+        "id": "10",
+        "title": "深入讲解WebView——上",
+        "url": "http://blog.kymjs.com/code/2015/05/03/01",
+        "imageUrl":"",
+        "date":"2015-05-03 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "作为Android开发者，我们都知道在手机中内置了一款高性能 webkit 内核浏览器,在 SDK 中封装为一个叫做 WebView 组件。今天就为大家讲讲Android中WebView的详细使用方法"
+    },
+    {
+        "id": "9",
+        "title": "OSChina，从东涌到西涌",
+        "url": "http://blog.kymjs.com/sentiment/2015/05/01/01",
+        "imageUrl":"http://blog.kymjs.com/images/blog_image/20150501_7.jpg",
+        "date":"2015-05-01 16:15:25",
+        "isRecommend":0,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "出发以前，不止一位朋友警告过我：从东涌到西涌是一段艰难的跋涉，要有心理准备。但在我的想象里，它仍然只是一段漫长的海岸线漫步而已——也许时间会久一点，五六个小时嘛，大家都这样说。"
+    },
+    {
+        "id": "8",
+        "title": "通用Adapter与ListView滚动时不加载图片的封装",
+        "url": "http://blog.kymjs.com/code/2015/04/28/01",
+        "imageUrl":"",
+        "date":"2015-04-28 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "介绍一个通用的Adapter实现，和对ListView滚动时不加载图片的封装。"
+    },
+    {
+        "id": "7",
+        "title": "我的创业方案A——都市书吧1",
+        "url": "http://blog.kymjs.com/sentiment/2015/04/27/01",
+        "imageUrl":"",
+        "date":"2015-04-27 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "身边一直有创业的朋友，也一直有想拉我创业的朋友，我只告诉他们还没到时间。90%的人都想过创业，但只有10%的人去做了，最后又只有这10%里面的10%成功了。我从来没有忘记过我的创业之心，在我的计划里会在25岁决定一个去留，是留在深圳还是回家创业(我不会呆在深圳或其他大城市创业，原因以后再说)，而决定这一去留的索引，很现实——就是在我25岁时的年薪。"
+    },
+    {
+        "id": "6",
+        "title": "仿iPhone辅助球实现",
+        "url": "http://blog.kymjs.com/code/2015/04/12/01/",
+        "imageUrl":"http://blog.kymjs.com/images/blog_image/20150412_1.jpg",
+        "date":"2015-04-12 16:15:25",
+        "isRecommend":0,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "过年在家时，翻出来了很多去年写的代码。就挑出来了一些自我感觉良好的讲解了。"
+    },
+    {
+        "id": "5",
+        "title": "项目经理初长成2——明确认知",
+        "url": "http://blog.kymjs.com/manager/2015/04/05/01/",
+        "imageUrl":"",
+        "date":"2015-04-05 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "作为项目经理，尤其是移动开发项目经理，有时候不得不去思考一些非技术上的东西，例如用户体验。"
+    },
+    {
+        "id": "4",
+        "title": "致那些正在迷茫期的开发者",
+        "url": "http://blog.kymjs.com/code/2015/04/01/01/",
+        "imageUrl":"http://blog.kymjs.com/images/blog_image/20150401_1.jpg",
+        "date":"2015-04-01 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "望着床头的两本书，突然有一些感想。"
+    },
+    {
+        "id": "3",
+        "title": "深入研究KJBitmap使用方法",
+        "url": "http://blog.kymjs.com/kjframeforandroid/2015/03/25/01/",
+        "imageUrl":"",
+        "date":"2015-03-25 16:15:25",
+        "isRecommend":0,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "好像最近一个月都没有写博客了，正好伴着KJFrameForAndroid更新v2.14版本，讲解一下其中Bitmap模块的深度用法。 "
+    },
+    {
+        "id": "2",
+        "title": "从Android到IOS，IOS应用生命周期函数",
+        "url": "http://my.oschina.net/kymjs/blog/374989",
+        "imageUrl":"http://static.oschina.net/uploads/space/2015/0203/140515_GNzc_863548.png",
+        "date":"2015-03-25 19:15:25",
+        "isRecommend":0,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "由于对于自己的C基础还算满意，花了一个月断断续续的把OC看完了，最近在看一些IOS开发的知识。从此，记录一只菜鸟IOS程序员的学习之路 "
+    },
+    {
+        "id": "1",
+        "title": "Android最方便的推送框架",
+        "url": "http://blog.kymjs.com/kjpush/2015/01/13/01/",
+        "imageUrl":"",
+        "date":"2015-01-13 16:15:25",
+        "isRecommend":1,
+        "author":"张涛",
+        "isAuthor":0,
+        "description": "本文主要讲在Android中实现推送方式的底层原理与推送的知识及相关解决方案。"
+    }
+]

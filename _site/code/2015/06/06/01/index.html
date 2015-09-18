@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Android流式布局实现</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2015/06/06/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>Android流式布局实现</h1>
+        <p>
+          <h2>2015-06-06</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2015/06/06/01">http://kymjs.com/code/2015/06/06/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        新项目用到了一种全新布局————Android标签流式布局的功能，正好一直说给大家讲自定义控件的实现，今天就为大家讲一种android流式布局的实现。<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#section">先看代码</a></li>
+  <li><a href="#section-1">从控件创建过程说起</a></li>
+  <li><a href="#section-2">流布局的实现</a></li>
+  <li><a href="#section-3">效果截图</a></li>
+</ul>
+
+<p>在日常的app使用中，我们会在android 的app中看见热门标签等自动换行的流式布局，今天，我们就来看看如何自定义一个类似热门标签那样的流式布局吧（源码下载在下面最后给出）<br />
+<a href="http://www.kymjs.com/"><img src="/images/blog_image/20150606_1.jpg" alt="OpenSourceLaboratory" /></a><br />
+这个控件并不是我实现的，代码是从网上搜流式布局找到的。我只是为大家讲解一下实现过程以及原理。  </p>
+
+<h2 id="section">先看代码</h2>
+
+<div class="highlight"><pre><code class="java"> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlowLayout</span> <span class="kd">extends</span> <span class="n">ViewGroup</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">mVerticalSpacing</span><span class="o">;</span> <span class="c1">//每个item纵向间距</span>
+    <span class="kd">private</span> <span class="kt">float</span> <span class="n">mHorizontalSpacing</span><span class="o">;</span> <span class="c1">//每个item横向间距</span>
+
+    <span class="kd">public</span> <span class="nf">FlowLayout</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="nf">FlowLayout</span><span class="o">(</span><span class="n">Context</span> <span class="n">context</span><span class="o">,</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">attrs</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHorizontalSpacing</span><span class="o">(</span><span class="kt">float</span> <span class="n">pixelSize</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mHorizontalSpacing</span> <span class="o">=</span> <span class="n">pixelSize</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setVerticalSpacing</span><span class="o">(</span><span class="kt">float</span> <span class="n">pixelSize</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">mVerticalSpacing</span> <span class="o">=</span> <span class="n">pixelSize</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onMeasure</span><span class="o">(</span><span class="kt">int</span> <span class="n">widthMeasureSpec</span><span class="o">,</span> <span class="kt">int</span> <span class="n">heightMeasureSpec</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">selfWidth</span> <span class="o">=</span> <span class="n">resolveSize</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">widthMeasureSpec</span><span class="o">);</span>
+
+        <span class="kt">int</span> <span class="n">paddingLeft</span> <span class="o">=</span> <span class="n">getPaddingLeft</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">paddingTop</span> <span class="o">=</span> <span class="n">getPaddingTop</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">paddingRight</span> <span class="o">=</span> <span class="n">getPaddingRight</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">paddingBottom</span> <span class="o">=</span> <span class="n">getPaddingBottom</span><span class="o">();</span>
+
+        <span class="kt">int</span> <span class="n">childLeft</span> <span class="o">=</span> <span class="n">paddingLeft</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">childTop</span> <span class="o">=</span> <span class="n">paddingTop</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">lineHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="c1">//通过计算每一个子控件的高度，得到自己的高度</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">childCount</span> <span class="o">=</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">childCount</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">View</span> <span class="n">childView</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+            <span class="n">LayoutParams</span> <span class="n">childLayoutParams</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getLayoutParams</span><span class="o">();</span>
+            <span class="n">childView</span><span class="o">.</span><span class="na">measure</span><span class="o">(</span>
+                    <span class="n">getChildMeasureSpec</span><span class="o">(</span><span class="n">widthMeasureSpec</span><span class="o">,</span> <span class="n">paddingLeft</span> <span class="o">+</span> <span class="n">paddingRight</span><span class="o">,</span>
+                            <span class="n">childLayoutParams</span><span class="o">.</span><span class="na">width</span><span class="o">),</span>
+                    <span class="n">getChildMeasureSpec</span><span class="o">(</span><span class="n">heightMeasureSpec</span><span class="o">,</span> <span class="n">paddingTop</span> <span class="o">+</span> <span class="n">paddingBottom</span><span class="o">,</span>
+                            <span class="n">childLayoutParams</span><span class="o">.</span><span class="na">height</span><span class="o">));</span>
+            <span class="kt">int</span> <span class="n">childWidth</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredWidth</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">childHeight</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredHeight</span><span class="o">();</span>
+
+            <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">childHeight</span><span class="o">,</span> <span class="n">lineHeight</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">childLeft</span> <span class="o">+</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">paddingRight</span> <span class="o">&gt;</span> <span class="n">selfWidth</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">childLeft</span> <span class="o">=</span> <span class="n">paddingLeft</span><span class="o">;</span>
+                <span class="n">childTop</span> <span class="o">+=</span> <span class="n">mVerticalSpacing</span> <span class="o">+</span> <span class="n">lineHeight</span><span class="o">;</span>
+                <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">childHeight</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">childLeft</span> <span class="o">+=</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">mHorizontalSpacing</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+
+        <span class="kt">int</span> <span class="n">wantedHeight</span> <span class="o">=</span> <span class="n">childTop</span> <span class="o">+</span> <span class="n">lineHeight</span> <span class="o">+</span> <span class="n">paddingBottom</span><span class="o">;</span>
+        <span class="n">setMeasuredDimension</span><span class="o">(</span><span class="n">selfWidth</span><span class="o">,</span> <span class="n">resolveSize</span><span class="o">(</span><span class="n">wantedHeight</span><span class="o">,</span> <span class="n">heightMeasureSpec</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onLayout</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">changed</span><span class="o">,</span> <span class="kt">int</span> <span class="n">l</span><span class="o">,</span> <span class="kt">int</span> <span class="n">t</span><span class="o">,</span> <span class="kt">int</span> <span class="n">r</span><span class="o">,</span> <span class="kt">int</span> <span class="n">b</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">myWidth</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">l</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">paddingLeft</span> <span class="o">=</span> <span class="n">getPaddingLeft</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">paddingTop</span> <span class="o">=</span> <span class="n">getPaddingTop</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">paddingRight</span> <span class="o">=</span> <span class="n">getPaddingRight</span><span class="o">();</span>
+
+        <span class="kt">int</span> <span class="n">childLeft</span> <span class="o">=</span> <span class="n">paddingLeft</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">childTop</span> <span class="o">=</span> <span class="n">paddingTop</span><span class="o">;</span>
+
+        <span class="kt">int</span> <span class="n">lineHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+        <span class="c1">//根据子控件的宽高，计算子控件应该出现的位置。</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">childCount</span> <span class="o">=</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">childCount</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">View</span> <span class="n">childView</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">childView</span><span class="o">.</span><span class="na">getVisibility</span><span class="o">()</span> <span class="o">==</span> <span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">continue</span><span class="o">;</span>
+            <span class="o">}</span>
+
+            <span class="kt">int</span> <span class="n">childWidth</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredWidth</span><span class="o">();</span>
+            <span class="kt">int</span> <span class="n">childHeight</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredHeight</span><span class="o">();</span>
+
+            <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">childHeight</span><span class="o">,</span> <span class="n">lineHeight</span><span class="o">);</span>
+
+            <span class="k">if</span> <span class="o">(</span><span class="n">childLeft</span> <span class="o">+</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">paddingRight</span> <span class="o">&gt;</span> <span class="n">myWidth</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">childLeft</span> <span class="o">=</span> <span class="n">paddingLeft</span><span class="o">;</span>
+                <span class="n">childTop</span> <span class="o">+=</span> <span class="n">mVerticalSpacing</span> <span class="o">+</span> <span class="n">lineHeight</span><span class="o">;</span>
+                <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">childHeight</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">childView</span><span class="o">.</span><span class="na">layout</span><span class="o">(</span><span class="n">childLeft</span><span class="o">,</span> <span class="n">childTop</span><span class="o">,</span> <span class="n">childLeft</span> <span class="o">+</span> <span class="n">childWidth</span><span class="o">,</span> <span class="n">childTop</span> <span class="o">+</span> <span class="n">childHeight</span><span class="o">);</span>
+            <span class="n">childLeft</span> <span class="o">+=</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">mHorizontalSpacing</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="section-1">从控件创建过程说起</h2>
+<ol>
+  <li>当这个流式布局在被加载如内存并显示在屏幕上这一过程中，首先会调用view.measure(w,h)这个方法，表示测量view的宽度与高度，其中参数w与h分别表示这个控件的父控件的宽高。  </li>
+  <li>在view.measure()方法的调用过程中又会调用view本身的一个回调方法,onMeasure()，这个是view自身的一个回调方法，用于让开发者在自定义View的时候重新计算自身的大小。一般会在这个方法中循环遍历，计算出这个控件的全部子孙控件的宽高。  </li>
+  <li>在View的宽高计算完成以后，考虑将这个控件显示到屏幕的指定位置上，此时view的onLayout()方法会被调用。 一般同时会在这个方法中计算出全部子孙控件在这个控件中的位置。<br />
+可能基本流程有些枯燥，接下来结合代码看看。  </li>
+</ol>
+
+<h2 id="section-2">流布局的实现</h2>
+<p>看到onMeasure()方法中的这段：
+//通过计算每一个子控件的高度，得到自己的高度</p>
+
+<div class="highlight"><pre><code class="java"> 
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">childCount</span> <span class="o">=</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">childCount</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+	    <span class="n">View</span> <span class="n">childView</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+	    <span class="n">LayoutParams</span> <span class="n">childLayoutParams</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getLayoutParams</span><span class="o">();</span>
+	    <span class="n">childView</span><span class="o">.</span><span class="na">measure</span><span class="o">(</span>
+	            <span class="n">getChildMeasureSpec</span><span class="o">(</span><span class="n">widthMeasureSpec</span><span class="o">,</span> <span class="n">paddingLeft</span> <span class="o">+</span> <span class="n">paddingRight</span><span class="o">,</span>
+	                    <span class="n">childLayoutParams</span><span class="o">.</span><span class="na">width</span><span class="o">),</span>
+	            <span class="n">getChildMeasureSpec</span><span class="o">(</span><span class="n">heightMeasureSpec</span><span class="o">,</span> <span class="n">paddingTop</span> <span class="o">+</span> <span class="n">paddingBottom</span><span class="o">,</span>
+	                    <span class="n">childLayoutParams</span><span class="o">.</span><span class="na">height</span><span class="o">));</span>
+	    <span class="kt">int</span> <span class="n">childWidth</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredWidth</span><span class="o">();</span>
+	    <span class="kt">int</span> <span class="n">childHeight</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredHeight</span><span class="o">();</span>
+
+	    <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">childHeight</span><span class="o">,</span> <span class="n">lineHeight</span><span class="o">);</span>
+
+	    <span class="k">if</span> <span class="o">(</span><span class="n">childLeft</span> <span class="o">+</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">paddingRight</span> <span class="o">&gt;</span> <span class="n">selfWidth</span><span class="o">)</span> <span class="o">{</span>
+	        <span class="n">childLeft</span> <span class="o">=</span> <span class="n">paddingLeft</span><span class="o">;</span>
+	        <span class="n">childTop</span> <span class="o">+=</span> <span class="n">mVerticalSpacing</span> <span class="o">+</span> <span class="n">lineHeight</span><span class="o">;</span>
+	        <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">childHeight</span><span class="o">;</span>
+	    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+	        <span class="n">childLeft</span> <span class="o">+=</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">mHorizontalSpacing</span><span class="o">;</span>
+	    <span class="o">}</span>
+	<span class="o">}</span>
+</code></pre></div>
+
+<p>首先通过循环，遍历这个控件的所有子控件，同时调用子控件的measure()方法，这时measure方法的两个参数是控件能给这个子控件的最大宽高(我们都知道的，子控件再大，显示的大小也不能比父控件还大)。这里getChildMeasureSpec()方法的作用是用来计算一个合适子视图的尺寸大小（宽度或者高度)，结合我们从子视图的LayoutParams所给出的MeasureSpec信息来获取最合适的结果。比如，如果这个View知道自己的大小尺寸（因为它本身的MeasureSpec的model为Exactly,）并且子视图的大小恰好跟父窗口一样大，父窗口必须用给定的大小去layout子视图  <br />
+参数含义：spec 父窗口传递给子视图的大小和模式<br />
+         padding 父窗口的边距，也就是xml中的android:padding<br />
+        childDimension 子视图想要绘制的准确大小，但最终不一定绘制此值  </p>
+
+<p>当得到了每一个子控件的大小以后，再要计算自己的宽高就简单了。<br />
+	int wantedHeight = childTop + lineHeight + paddingBottom;  </p>
+
+<p>同理，在onLayout中的这一句</p>
+
+<div class="highlight"><pre><code class="java"> 
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">childCount</span> <span class="o">=</span> <span class="n">getChildCount</span><span class="o">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">childCount</span><span class="o">;</span> <span class="o">++</span><span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+	    <span class="n">View</span> <span class="n">childView</span> <span class="o">=</span> <span class="n">getChildAt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+
+	    <span class="k">if</span> <span class="o">(</span><span class="n">childView</span><span class="o">.</span><span class="na">getVisibility</span><span class="o">()</span> <span class="o">==</span> <span class="n">View</span><span class="o">.</span><span class="na">GONE</span><span class="o">)</span> <span class="o">{</span>
+	        <span class="k">continue</span><span class="o">;</span>
+	    <span class="o">}</span>
+
+	    <span class="kt">int</span> <span class="n">childWidth</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredWidth</span><span class="o">();</span>
+	    <span class="kt">int</span> <span class="n">childHeight</span> <span class="o">=</span> <span class="n">childView</span><span class="o">.</span><span class="na">getMeasuredHeight</span><span class="o">();</span>
+
+	    <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">childHeight</span><span class="o">,</span> <span class="n">lineHeight</span><span class="o">);</span>
+
+	    <span class="k">if</span> <span class="o">(</span><span class="n">childLeft</span> <span class="o">+</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">paddingRight</span> <span class="o">&gt;</span> <span class="n">myWidth</span><span class="o">)</span> <span class="o">{</span>
+	        <span class="n">childLeft</span> <span class="o">=</span> <span class="n">paddingLeft</span><span class="o">;</span>
+	        <span class="n">childTop</span> <span class="o">+=</span> <span class="n">mVerticalSpacing</span> <span class="o">+</span> <span class="n">lineHeight</span><span class="o">;</span>
+	        <span class="n">lineHeight</span> <span class="o">=</span> <span class="n">childHeight</span><span class="o">;</span>
+	    <span class="o">}</span>
+	    <span class="n">childView</span><span class="o">.</span><span class="na">layout</span><span class="o">(</span><span class="n">childLeft</span><span class="o">,</span> <span class="n">childTop</span><span class="o">,</span> <span class="n">childLeft</span> <span class="o">+</span> <span class="n">childWidth</span><span class="o">,</span> <span class="n">childTop</span> <span class="o">+</span> <span class="n">childHeight</span><span class="o">);</span>
+	    <span class="n">childLeft</span> <span class="o">+=</span> <span class="n">childWidth</span> <span class="o">+</span> <span class="n">mHorizontalSpacing</span><span class="o">;</span>
+	<span class="o">}</span> 
+</code></pre></div>
+
+<p>首先通过循环遍历，控制每个item子控件的显示位置，如果当前行还能放得下一个item，就放到当前行，如果放不下就放到下一行的最左边。<br />
+最终，遍历完成，也就相当于把自己的位置显示完成了。</p>
+
+<h2 id="section-3">效果截图</h2>
+<p><a href="http://www.kymjs.com/"><img src="/images/blog_image/20150606_2.gif" alt="OpenSourceLaboratory" /></a>  </p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2015/06/06/01" data-title="Android流式布局实现" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2015/06/06/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2015-06-06-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

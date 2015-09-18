@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Android注解式绑定控件，没你想象的那么难</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2014/12/05/03">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>Android注解式绑定控件，没你想象的那么难</h1>
+        <p>
+          <h2>2014-12-05</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2014/12/05/03">http://kymjs.com/code/2014/12/05/03</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        Android开发中，有一个让人又爱又恨的方法叫findViewById(int);我想如果你是一民Android开发者，必然知道这个方法。 那么为什么让人又爱又恨呢？想必大家也是很有感触。<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#section">吐槽</a></li>
+  <li><a href="#section-1">了解注解：</a></li>
+  <li><a href="#section-2">使用注解：</a></li>
+  <li><a href="#section-3">处理注解：</a></li>
+  <li><a href="#android">在Android项目中应用：</a></li>
+</ul>
+
+<h3 id="section">吐槽</h3>
+<p>Android开发中，有一个让人又爱又恨的方法叫findViewById(int);我想如果你是一民Android开发者，必然知道这个方法，</p>
+
+<p>为什么说<code>findViewById(int);</code>让人又爱又恨呢？想必大家也是很有感触。<br />写一个布局，用Java代码写和用xml文件写，完成速度完全是无法比拟的。xml布局太方便了。<br />同样的，想获取一个控件的对象，如果你是使用的xml布局文件写的布局，那么你必须调用findViewById()这个方法。<br />  </p>
+
+<pre><code>TextView t = (TextView) findViewById(R.id.x);
+</code></pre>
+
+<p>这是我们最常见的 获取xml布局中一个textview对象的过程。<br />那么问题就来了，这特么奇葩的方法名也太长了吧！！！好吧，其实人家名字起的也没有错，要描述清楚这函数的含义，也必须这么多个字母。  </p>
+
+<p>可是你丫的返回一个View让我用的时候还得强转，这也太麻烦了吧。我一行代码总共也就80列（Eclipse默认），缩进八格（方法写在类里面，语句写在方法里面），<br />就算像上面的例子textView对象只有一个字母，id也只有一个字母，这一个初始化也要占我54列了。要是变量名再长点，缩进层次再深点，这一个初始化就两行了。<br />一个界面至少也有四个控件吧，这么复杂的初始化，太坑爹了。<br />有问题总会有对应的解决办法，下面我就向大家介绍一下<code>KJFrameForAndroid框架</code>使用注解解决这种麻烦。  </p>
+
+<h3 id="section-1">了解注解：</h3>
+
+<p>从jdk1.5开始，Java提供了注解的功能，允许开发者定义和使用自己的注解类型，该功能由一个定义注解类型的语法和描述一个注解声明的语法，读取注解的API，一个使用注解修饰的class文件和一个注解处理工具组成。<br />首先，你需要接受一个关键字<a href="http://my.oschina.net/u/996807" target="_blank" rel="nofollow">@interface</a> ,噢，它可不是接口定义关键字，更不是OC里面的@interface关键字，是Java中表示声明一个注解类的关键字。<br />使用@interface表示我们已经继承了java.lang.annotation.Annotation类，这是一个注解的基类接口，就好像Object类，现在你只需要知道它的存在就行了。<br />还有一条规定：在定义注解时，不能继承其他的注解或接口。<br />那么，这就是最简单的一个注解类<br /></p>
+
+<pre><code>public @interface MyAnnotation {
+}
+</code></pre>
+
+<p>然而通常在使用时我们都会给这个注解类加上两个注解：</p>
+
+<pre><code>@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+</code></pre>
+
+<p>ElementType、RetentionPolicy是两个枚举类，ElementType.FIELD表示我们需要注解的是一个字段，以下是摘自JDK1.6文档中的介绍：</p>
+
+<p><img src="https://static.oschina.net/uploads/space/2014/0823/153748_usr8_863548.png" /></p>
+
+<p><img src="https://static.oschina.net/uploads/space/2014/0823/153748_JBec_863548.png" /></p>
+
+<h3 id="section-2">使用注解：</h3>
+
+<p>以下为KJFrameForAndroid框架中绑定控件注解部分的定义与使用：</p>
+
+<pre><code>@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface BindView {
+public int id();
+public boolean click() default false;
+}
+
+@BindView(id = R.id.x, click = true)
+private TextView t;
+</code></pre>
+
+<p>我们可以看到，除了明显减少了代码量，还使得代码结构更加清晰。<br />其中，定义部分的id() 表示注解接受一个int类型的数据作为id所对应的值（就如使用中的id = R.id.xxx）;<br />同理，定义部分的click表示接受一个Boolean类型的数据作为click对应的值，还可以设置一个默认值使用default修饰；</p>
+
+<h3 id="section-3">处理注解：</h3>
+
+<p>我们已经知道了注解怎么定义和使用，接下来就应该知道怎么处理了。<br />上面已经说了，bindview注解可以接受一个int类型的值和一个Boolean类型的值，那么这两个值接受了以后如何获取呢？<br />其实获取的方式很简单就是通过一个BindView类型的对象，调用这个对象来自声明中定义的两个方法——&gt;id()或click()方法。<br />现在就有一个问题了，注解类型是不能直接new对象的，那么这个BindView对象从哪里来呢？<br />这时就需要用到Java的反射机制。我们知道，每一个继承自Object类的类都会继承一个getClass()方法，下面看一下这个方法的原型：</p>
+
+<pre><code>/**
+* Returns the unique instance of {@link Class} that represents this
+* object&amp;#39;s class. Note that {@code getClass()} is a special case in that it
+* actually returns {@code Class&amp;lt;? extends Foo&amp;gt;} where {@code Foo} is the
+* erasure of the type of the expression {@code getClass()} was called upon.
+* &amp;lt;p&amp;gt;
+* As an example, the following code actually compiles, although one might
+* think it shouldn&amp;#39;t:
+* &amp;lt;p&amp;gt;
+* &amp;lt;pre&amp;gt;{@code
+*   List&amp;lt;Integer&amp;gt; l = new ArrayList&amp;lt;Integer&amp;gt;();
+*   Class&amp;lt;? extends List&amp;gt; c = l.getClass();}&amp;lt;/pre&amp;gt;
+*
+* @return this object&amp;#39;s {@code Class} instance.
+*/
+public final native Class&amp;lt;?&amp;gt; getClass();
+</code></pre>
+
+<p>是一个native方法，根据注释我们知道，这个方法返回的是该类的Class对象，同时也是该类的二进制对象。<br />Class中有一个方法叫getDeclaredFields()，是用来返回这个类的全部字段，返回类型是Field[]<br />通过Field对象的getAnnotation(Class&lt;?&gt;)方法，我们可以获取到任何一个Class的对象，通过getAnnotation(Class&lt;?&gt;)，我们就可以获取到BindView的对象了。</p>
+
+<p>例如：</p>
+
+<pre><code>Field[] fields = currentClass.getClass().getDeclaredFields();
+for(int i = 0; i &amp;lt; fields.length; i++){
+
+BindView bindView = field.getAnnotation(BindView.class);
+
+int viewId = bindView.id();  //这是我们传的id
+
+boolean clickLis = bindView.click(); //这是我们传的click
+}
+</code></pre>
+
+<h3 id="android">在Android项目中应用：</h3>
+
+<p>至此，我们已经了解了注解，并且知道怎么使用，怎么处理注解了，现在只剩下最后一个问题：在项目中使用。<br />很简单，传一个Activity对象，调用findViewById()不就行了。<br />于是，我们可以这样<br />activity.findViewById( bindView.id() );<br />最后在我们的Activity中调用这个函数就OK了。</p>
+
+<p>以下是Android应用框架KJFrameForAndroid中使用注解绑定控件的核心代码：</p>
+
+<pre><code>/**
+* @param currentClass
+*            当前类，一般为Activity或Fragment
+* @param sourceView
+*            待绑定控件的直接或间接父控件
+*/
+public static void initBindView(Object currentClass, View sourceView) {
+  // 通过反射获取到全部属性，反射的字段可能是一个类（静态）字段或实例字段
+  Field[] fields = currentClass.getClass().getDeclaredFields();
+  if (fields != null; fields.length &gt; 0) {
+    for (Field field : fields) {
+      // 返回BindView类型的注解内容
+      BindView bindView = field.getAnnotation(BindView.class);
+      if (bindView != null) {
+        int viewId = bindView.id();
+        boolean clickLis = bindView.click();
+        try {
+          field.setAccessible(true);
+          if (clickLis) {
+            sourceView.findViewById(viewId).setOnClickListener(
+            (OnClickListener) currentClass);
+          }
+          // 将currentClass的field赋值为sourceView.findViewById(viewId)
+          field.set(currentClass, sourceView.findViewById(viewId));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+<p>其实安卓中的注解式绑定控件（也是所谓的IOC控制反转在安卓中的一种应用）其实本质的使用就是Java基础中反射的使用。值得一提的是，反射执行的效率是很低的<br /><span style="color: rgb(255, 0, 0);">如果不是必要，应当尽量减少反射的使用，因为它会大大拖累你应用的执行效率。</span><br />顺带一提：我一直很排斥注解，因为类反射的效率太低了。现在有很多安卓应用开发框架，比如KJFrameForAndroid, xUtils, afinal, thinkAndroid，这些框架都是使用反射来起到注解绑定控件。<br />更有的框架甚至是一切东西都使用注解去完成，我只能说注解便捷，但请慎用。<br /></p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2014/12/05/03" data-title="Android注解式绑定控件，没你想象的那么难" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2014/12/05/03"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2014-12-05-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

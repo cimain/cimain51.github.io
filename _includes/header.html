@@ -1,0 +1,41 @@
+<header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        {% if page.url == "/index.html" %}
+          <li class="active">{% else %}<li>
+        {% endif %}
+        <a href="{{ site.baseurl }}/"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        {% if page.url == "/works/index.html" %}
+          <li class="active">{% else %}<li>
+        {% endif %}
+        <a href="{{ site.baseurl }}/works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        {% for link in site.links %}
+          <li>
+          <a href="{{ link.url }}"><span class="glyphicon glyphicon-heart"></span> {{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>

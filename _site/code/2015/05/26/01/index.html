@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Android夜间模式实现</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2015/05/26/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>Android夜间模式实现</h1>
+        <p>
+          <h2>2015-05-26</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2015/05/26/01">http://kymjs.com/code/2015/05/26/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        最近在做一个Android夜间模式的功能，又重新研究了一下Theme机制。贯彻我的风格，以解决问题为目标，写了个小Demo，简单了实现了切换夜间模式，为大家讲解。<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#section">创建属性名</a></li>
+  <li><a href="#section-1">定义资源样式</a></li>
+  <li><a href="#section-2">布局中使用</a></li>
+  <li><a href="#section-3">代码中使用</a></li>
+</ul>
+
+<p>最近在做一个Android夜间模式的功能，又重新研究了一下Theme机制。贯彻我的风格，以解决问题为目标，写了个小Demo，简单了实现了切换夜间模式，为大家讲解。<br />
+在Activity中有一个方法叫setTheme()，可以设置Activity的Theme，当然Application类中也有相同的方法，也可以在Application中设置当前应用的Theme。就好像我们可以在Manifest文件中通过android:theme=“”来设置主题一样。  </p>
+
+<h2 id="section">创建属性名</h2>
+<p>在工程目录res/values/下新建一个xml文件，名字可以自定义，这里我的叫theme_attr.xml 内容如下：</p>
+
+<div class="highlight"><pre><code class="xml"> 
+	<span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+	<span class="nt">&lt;resources&gt;</span>
+	    <span class="nt">&lt;attr</span> <span class="na">name=</span><span class="s">&quot;text_bg&quot;</span> <span class="na">format=</span><span class="s">&quot;reference|color&quot;</span><span class="nt">/&gt;</span>
+	    <span class="nt">&lt;attr</span> <span class="na">name=</span><span class="s">&quot;bottom_bg&quot;</span> <span class="na">format=</span><span class="s">&quot;reference|color&quot;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;/resources&gt;</span>
+</code></pre></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>其中text_bg和bottom_bg就是我们定义的两个属性名，后面的format是指的这个属性名的类型，这里我是用reference</td>
+      <td>color表示既可以是一个引用，也可以是一个argb颜色值。除了这些你还可以选择int，boolan，string等数据类型。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-1">定义资源样式</h2>
+<p>创建完属性名后就需要创建主题样式了。依旧在res/values/下新建一个xml文件，或者也可以在原style.xml中写，是一样的。这里为了项目结构清晰，就单独写一个文件叫theme_dark.xml 我们需要在这里定义步骤一中定义的各属性名在当前主题下的值。  </p>
+
+<div class="highlight"><pre><code class="xml"> 
+	<span class="nt">&lt;resources&gt;</span>
+	    <span class="c">&lt;!-- Base application theme. --&gt;</span>
+	    <span class="nt">&lt;style</span> <span class="na">name=</span><span class="s">&quot;DarkTheme&quot;</span> <span class="na">parent=</span><span class="s">&quot;@android:style/Theme&quot;</span><span class="nt">&gt;</span>
+	        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&quot;text_bg&quot;</span><span class="nt">&gt;</span>@drawable/selector_text_bg_dark<span class="nt">&lt;/item&gt;</span>
+	        <span class="nt">&lt;item</span> <span class="na">name=</span><span class="s">&quot;bottom_bg&quot;</span><span class="nt">&gt;</span>@drawable/bg_bottombar_dark<span class="nt">&lt;/item&gt;</span>
+	    <span class="nt">&lt;/style&gt;</span>
+	<span class="nt">&lt;/resources&gt;</span>
+</code></pre></div>
+
+<p>需要注意的是，我们自己定义的style必须直接或间接继承系统的Theme，否则很多系统主题找不到就会报错。<br />
+还有一点，我们声明了两个属性，这里一定要记得都把值定义了，如果不定义也不会错。但是如果在代码中引用了相应的属性，而这个主题没有定义这个属性的值会运行出错的。<br />
+这里可以看到因为上面我属性类型定义了引用或颜色，所以这里的值我既可以传@drawable类型的引用也可以直接赋值一个#ff00ff这样的颜色值。  </p>
+
+<h2 id="section-2">布局中使用</h2>
+<p>布局文件中使用我们自定义的文件时，需要添加一个问号来表示引用。例如</p>
+
+<div class="highlight"><pre><code class="xml"> 
+	<span class="nt">&lt;LinearLayout</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+          <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+          <span class="na">android:layout_height=</span><span class="s">&quot;match_parent&quot;</span>
+          <span class="na">android:orientation=</span><span class="s">&quot;vertical&quot;</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;Button</span>
+	        <span class="na">android:id=</span><span class="s">&quot;@+id/login_btn&quot;</span>
+	        <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+	        <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+	        <span class="na">android:background=</span><span class="s">&quot;?text_bg&quot;</span>
+	        <span class="na">android:text=</span><span class="s">&quot;登录&quot;</span><span class="nt">/&gt;</span>
+	<span class="nt">&lt;/LinearLayout&gt;</span>
+</code></pre></div>
+
+<p>这样就表示我们的登录按钮的背景使用的是前面定义的属性名text_bg在当前主题下的值，也就是我们步骤二中定义的@drawable/selector_text_bg_dark这张图片(其实是一个选择器了)</p>
+
+<h2 id="section-3">代码中使用</h2>
+<p>以一个最简单的例子来说明了，需要注意的是一定要在Activity的setContentView调用之前调用setTheme()方法。网上有很多介绍都说的是在super之前，其实这种说法并不准确。当我们动态切换主题时，例如点击某个按钮，切换主题，这个时候需要再次手动调用setContentView()方法，并重新调用控件初始化以及监听器设置。但是这里告诉你一种简单方法：直接手动调用recreate()方法，再次创建视图就可以了。</p>
+
+<div class="highlight"><pre><code class="xml"> 
+	public class UserInfor extends KJActivity {
+	    @BindView(id = R.id.logout_btn, click = true)
+	    private Button mBtnLogout;
+
+	    @Override
+	    public void setRootView() {
+	        setContentView(R.layout.activity_userinfor);
+	    }
+
+	    @Override
+	    public void widgetClick(View v) {
+	        super.widgetClick(v);
+	        switch (v.getId()) {
+	            case R.id.logout_btn:
+	                setTheme(R.style.DarkTheme);
+	                recreate();
+	                break;
+	        }
+	    }
+	}
+</code></pre></div>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2015/05/26/01" data-title="Android夜间模式实现" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2015/05/26/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2015-05-26-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

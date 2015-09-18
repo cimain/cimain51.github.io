@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>面向时空编程</title>
+	<meta name="description" content="">
+	
+	<link rel="canonical" href="//code/2015/03/16/01">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header align="center">
+        <h1>面向时空编程</h1>
+        <p>
+          <h2>2015-03-16</h2>
+          
+          
+        </p>
+      </header>
+      <hr>
+      <article id="page">
+        <h2>摘要</h2>
+        本文原创，转载请注明地址：<a href="http://kymjs.com/code/2015/03/16/01">http://kymjs.com/code/2015/03/16/01</a><br>
+        欢迎加入我的AndroidQQ群：【<a href="http://jq.qq.com/?_wv=1027&k=P9EObD">257053751</a>】，本博客客户端下载【<a href="http://www.kymjs.com/app">请点击</a>】<br>
+        如果你能看到我的头脑如何思考，你就会发现，当我的眼睛看到代码或者公式的时候，我的头脑看到的并不是代码和公式，而是自动把它们翻译成了一些电路，流体导管一类的东西，它们存在于一个具有多重现实和历史的，像 Matrix 一样的世界里。这些直觉都不是从书里来的，也不是老师教的，而是通过观察身边的事物得到的。<br>
+        <h2>正文</h2>
+        <ul id="markdown-toc">
+  <li><a href="#section">相信前人</a></li>
+  <li><a href="#section-1">相信自己</a></li>
+  <li><a href="#section-2">解放思想</a></li>
+  <li><a href="#section-3">天才之路方法论</a></li>
+  <li><a href="#section-4">调谐左右脑与时空</a></li>
+  <li><a href="#section-5">时间和空间 就是 变与不变</a></li>
+  <li><a href="#section-6">任督二脉</a></li>
+  <li><a href="#section-7">我们无处不在</a></li>
+  <li><a href="#section-8">把问题集合化，把集合类型化，把类型空间化，把空间组织化。</a></li>
+</ul>
+
+<h2 id="section">相信前人</h2>
+
+<p>“如果你能看到我的头脑如何思考，你就会发现，当我的眼睛看到代码或者公式的时候，我的头脑看到的并不是代码和公式，而是自动把它们翻译成了一些电路，流体导管一类的东西，它们存在于一个具有多重现实和历史的，像 Matrix 一样的世界里。这些直觉都不是从书里来的，也不是老师教的，而是通过观察身边的事物得到的。”——王垠</p>
+
+<h2 id="section-1">相信自己</h2>
+<p>王垠给的这段描述我之前读的时候没有印象，现在有了触动。之前不处在接收这段信息的状态，经过半年的改造自己的历程后发现能接收这段信息了。是不是matrix我不知道，在我的世界里是来自于一片森林上的节点的组合，这些来自于森林中的树上的节点会聚合在一个空间单元中，然后这种单元集会被平铺到一个平面上或者挂接到另一棵树上，就是这样的一片森林。</p>
+
+<h2 id="section-2">解放思想</h2>
+<p>经过努力的思想和8个月的实践，我确信我找到了人们所认为的天才的实质内容是什么，以及普通人如何把自己操作到天才的状态。把人脑调谐到那种状态，这肯定是一种可重现的操作过程和结果。我绝对普通，但我也不认为天才们的物质构造与我们有什么本质不同。每一个个体的构造都是足够相似的，我相信如果我们找到天才们是如何由普通人构建到天才的状态的，我们一定可以批量制造天才。</p>
+
+<h2 id="section-3">天才之路方法论</h2>
+<p>问题的关键是打通任督二脉，改由自然环境为我们随机打通为由内而外的一系列操作去打通。由随机变为有一定的可操控性这是一个大进步哈。前人给我们留下过忠告，一两个人告诉我们用图形思考就算了，可是我们能从历史上找一群人都这么说，不得不重视。</p>
+
+<h2 id="section-4">调谐左右脑与时空</h2>
+<p>前人用图形思考忠告的本质是调谐人脑，绝大部分人是左脑思考的，图形用来调谐左右脑，用来激活右脑。其实本质是把左右脑和这个时空调谐一致，因为我们的大脑就是由这个时空花费千万年构建的。所有的操作过程都是在围绕着时间与空间，都是在围绕着时空与我们的相通性进行。
+世界是由内而外的也是由外而内的
+操控是由内而外的。只是之前是自然环境给予我们相对随机的信息，然后我们在内部处理这些信号，这些相对随机的信号刚好帮助了那些所谓的天才把内在调整到了天才的内部状态。现在一样是由内而外的，只是外部的信号被改造了而已，将来自自然环境的相对随机的信息改为来自于经过他人设定的相对不随机的信号。</p>
+
+<p>人脑具有可塑性，人脑的物质构造是足够相似的，只是比一个简单函数处理的输入输出过程复杂了很多，但是道理是完全一样的。给予大脑的输入会影响大脑的状态，这是显然的，人们的大脑必定具有相似的状态，因为大家的认知具有一致性，大家对于外部信号的反映具有一致性。</p>
+
+<p>人脑不是函数式的，世界的本质不可能是函数式的，因为函数式与时空理论不一致。时间是变化，空间是可识别的状态。变化绝对会影响状态，函数式说的替换而不修改的意义可能是认为替换是一种更好的修改。函数式的函数只是不直接影响自己的父节点的状态，可是函数的父节点拿到函数的输出后会用这个输出影响自己的状态。一直往上追溯父节点，最终到达系统根节点，系统根节点内部是在不停的修改自己内部的状态的，跟命令式没有任何本质差别。差别只在管理学上，函数式跟面向对象一样都是主体用来管理时间和空间的方法论。</p>
+
+<h2 id="section-5">时间和空间 就是 变与不变</h2>
+<p>变是时间，不变是空间。变，是主体可以感知到的变，不变，也是主体可以感知到的不变。不是直接感知，就是间接感知。
+所谓“感”“知”：所有的我们能够感受到的、认知到的、想象到的、臆测到的都是感知，都是存在。
+1公里外马路边上的花开了，它的开对我没有影响吗？绝对有，只是间接影响，这种间接的程度可能大到宇宙运行10000亿年后才能传递到我，只是10000亿年后的我已经不是今天的我这样的存在，我已经换了另一个存在。</p>
+
+<h2 id="section-6">任督二脉</h2>
+<p>10000亿年是臆测吗？是或不是。多少年都有可能，宇宙没有开始，也没有结束啊。宇宙的开始可能永远都找不到，因为根本就没有开始，也可能永远都结束不了，因为没有开始怎么会结束呢。无始无终之物，岂能用10000亿年来度量。我不再度量世界，试试学我们的古人去认知世界的性质吧。运动 = 时间 = 变化 = （场） = 空间 = 地点 = 位置 = 场所。时空一体。
+哪里是开始？无 是开始。哪里是结束？无 是结束。完了，这到了数据库里的null != null这个问题了。null != null，开始处的null不等于结束处的null，这两个null若是不等的话宇宙必定还没有结束。
+但是如果，宇宙的开始是null，结束也是null，且开始处的null=结束处的null，这又导致我们无法分辨一个null到底是开始还是结束，宇宙到底是还没开始呢还是已经结束了呢？
+数据库里的null概念不是物理人定义的，javascript是物理人构建的，更好的映射了物理世界。javascript除了null外还有undefined。计算机世界中的东西是我们定义的，计算机运动到undefined去了的意思是运动到计算机未知的世界去了，但计算机不知道的东西我们知道。</p>
+
+<h2 id="section-7">我们无处不在</h2>
+<p>我们是计算机的神，计算机里的东西是我们定义的，我们定义了计算机的开始，只是我们可能预测不完它直到结束的这整个过程（其实并不是我们开启了计算机世界，计算机世界跟我们的世界一直都是同一个世界，计算机世界跟我们的宇宙是同一个世界）。我们是计算机的神，但假设我们不是万物的神，假设万物的神另有其人。我们不必担心我们的神，他控制不了我们了。就像现在计算机世界在爆炸式的生长一样，终有一天我们控制不了计算机世界，因为有可能以后我们若想预测完计算机世界的话，所耗费的能量可能大到把我们自己归为零。上帝要想消灭我们的话他可能也需要把自己归为零，我们不再假设我们的上帝另有其人，因为我们就是我们的上帝。</p>
+
+<h2 id="section-8">把问题集合化，把集合类型化，把类型空间化，把空间组织化。</h2>
+<p>我是一个十分普通的人。由于误打误撞，在实践中终于发现分析处理问题时是有诀窍的，诀窍就在于唤醒沉睡的右脑，把问题“空间”化。
+一旦你掌握了这个诀窍，那些在别人苦思幂想都解不开的谜团在你看来可能非常直观简单。别人的右脑在浪费。
+具体操作起来，打通任督二脉的训练过程是：把问题集合化，把集合类型化，把类型空间化，把空间组织化。</p>
+
+        <div align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-4706145830093249"
+               data-ad-slot="1547827239"
+               data-ad-format="auto"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+      </article>
+      <hr>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/code/2015/03/16/01" data-title="面向时空编程" data-image="http://www.kymjs.com/image/logo_s.jpg" data-url="http://www.kymjs.com/code/2015/03/16/01"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header" align="center">
+        <a href="https://github.com/kymjs/kymjs.github.io/blob/master/_posts/2015-03-16-01.md"> --> <font color="#FF0000">文章纠错</font> <-- </a>
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

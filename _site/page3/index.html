@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>kymjs张涛</title>
+	<meta name="description" content="张涛的博客">
+	
+	<link rel="canonical" href="//page3/">
+	<link rel="alternate" type="application/rss+xml" title="kymjs张涛" href="//feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="//css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/fontawesome/4.2.0/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="//static/css/bootstrap.min.css"> -->
+	
+
+	<link rel="stylesheet" type="text/css" href="//static/css/index.css">
+	
+	<!-- <script type="text/javascript" src="//static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="//static/js/bootstrap.min.js"></script> -->
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="//static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?12d2f5b556fafe71819af97b2ec2c5e8";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//">kymjs张涛</a>
+      <p class="navbar-text">无论何时，请保持学者的谦逊与宽容</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+      <ul class="nav navbar-nav navbar-right">
+
+        <li>
+        
+        <a href="//"><span class="glyphicon glyphicon-th-large"></span> 博客</a></li>
+        
+        <li>
+        
+        <a href="//works"><span class="glyphicon glyphicon-play"></span> 作品</a></li>
+
+        
+          <li>
+          <a href="/about/"><span class="glyphicon glyphicon-heart"></span> 关于</a>
+          </li>
+        
+          <li>
+          <a href="/link/"><span class="glyphicon glyphicon-heart"></span> 友链</a>
+          </li>
+        
+          <li>
+          <a href="/donate/"><span class="glyphicon glyphicon-heart"></span> 捐赠</a>
+          </li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+    <div id="main" class="container main">
+      <div id="index" class="row">
+  <div class="col-sm-9">
+    <div class="post-area">
+      <a href="http://blog.kymjs.com/tweet/" title="留言板">
+        <div class="post-list-header">
+          <font color="#EE0000">置顶</font>:
+          <font color="#333333">留言板</font>
+        </div>
+      </a>
+      <div class="post-list-body">
+        
+        <div class="all-posts" post-cate="All">
+        
+          <a href="/code/2015/03/25/01" title="深入研究KJBitmap使用方法">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2015-03-25T00:00:00+08:00">
+                <font color="#aaaaaa">    2015-03-25 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">深入研究KJBitmap使用方法</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 好像最近一个月都没有写博客了，正好伴着KJFrameForAndroid更新v2.14版本，讲解一下其中Bitmap模块的深度用法。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2015/03/16/01" title="面向时空编程">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2015-03-16T00:00:00+08:00">
+                <font color="#aaaaaa">    2015-03-16 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">面向时空编程</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 如果你能看到我的头脑如何思考，你就会发现，当我的眼睛看到代码或者公式的时候，我的头脑看到的并不是代码和公式，而是自动把它们翻译成了一些电路，流体导管一类的东西，它们存在于一个具有多重现实和历史的，像 Matrix 一样的世界里。这些直觉都不是从书里来的，也不是老师教的，而是通过观察身边的事物得到的。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2015/02/09/01" title="对Android中的多图片异步加载的重新思考">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2015-02-09T00:00:00+08:00">
+                <font color="#aaaaaa">    2015-02-09 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">对Android中的多图片异步加载的重新思考</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 现在想来，Android SDK把并行执行改为串行执行也并不无道理。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2015/02/03/01" title="从Android到IOS">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2015-02-03T00:00:00+08:00">
+                <font color="#aaaaaa">    2015-02-03 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">从Android到IOS</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 由于对于自己的C基础还算满意，花了一个月断断续续的把OC看完了，最近在看一些IOS开发的知识。从此，记录一只菜鸟IOS程序员的学习之路 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2015/01/13/01" title="Android最方便的推送框架">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2015-01-13T00:00:00+08:00">
+                <font color="#aaaaaa">    2015-01-13 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">Android最方便的推送框架</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 本文主要讲在Android中实现推送方式的底层原理与推送的知识及相关解决方案。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/manager/2015/01/12/01" title="软件开发">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2015-01-12T00:00:00+08:00">
+                <font color="#aaaaaa">    2015-01-12 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                
+                
+                  <font color="#0066CC">管理</font>:
+                  <font color="#333333">软件开发</font>
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 无意间在公司发现了《项目经理应该知道的97件事》这本书，是一个惊喜。因为很早之前曾经看过这本书的电子版，只是由于是电子版的，并没有看的那么认真。这次就捧着这本书，从新再细读一遍，顺便写一系博客记录下自己的感悟与成长之路。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/stickies/2014/12/26/01" title="2014年终总结">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2014-12-26T00:00:00+08:00">
+                <font color="#aaaaaa">    2014-12-26 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                
+                  <font color="#FF8000">思考</font>:
+                  <font color="#333333">2014年终总结</font>
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 不知不觉已经连续三年了，每年给自己一个总结。第一年，写在贴吧；第二年，写在CSDN论坛；第三年以及以后，都写在自己的博客吧。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2014/12/05/03" title="Android注解式绑定控件，没你想象的那么难">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2014-12-05T00:00:00+08:00">
+                <font color="#aaaaaa">    2014-12-05 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">Android注解式绑定控件，没你想象的那么难</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> Android开发中，有一个让人又爱又恨的方法叫findViewById(int);我想如果你是一民Android开发者，必然知道这个方法。 那么为什么让人又爱又恨呢？想必大家也是很有感触。 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2014/12/05/02" title="高效加载Bitmap">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2014-12-05T00:00:00+08:00">
+                <font color="#aaaaaa">    2014-12-05 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">高效加载Bitmap</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 有效解决加载Bitmap时出现OOM的问题 </font></p>
+              
+            </div>
+          </a>
+        
+          <a href="/code/2014/12/05/01" title="Android仿微信录音功能，自定义控件的设计技巧">
+            <div class="post-list-item">
+              <span class="entry-date date published">
+              <time datetime="2014-12-05T00:00:00+08:00">
+                <font color="#aaaaaa">    2014-12-05 By 张涛</font>
+              </time>
+              </span>
+
+              <h2>
+                
+                  <font color="#AE57A4">技术</font>:
+                  <font color="#333333">Android仿微信录音功能，自定义控件的设计技巧</font>
+                
+                
+                
+                
+              </h2>
+
+              
+                <p><font color="#666666"> 讲解一个比较通用的录音控件实现方法与设计技巧 </font></p>
+              
+            </div>
+          </a>
+        
+          
+          <!-- 分页 -->
+      <div class="paginator">
+              
+              <!-- 分页代码 -->
+              
+            <a href="/page2">上一页</a>
+        
+
+        
+            
+              <a href="/index.html">1</a>
+            
+        
+            
+              <a href="/page2">2</a>
+            
+        
+            
+              <span class="active">3</span>
+            
+        
+            
+              <a href="/page4">4</a>
+            
+        
+
+        
+            <a href="/page4">下一页</a>
+        
+              
+      </div>
+      
+
+        </div>
+        
+          <div post-cate="Android技术讲解">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//code/2015/06/06/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-06-06T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-06-06 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android流式布局实现</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/05/26/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-26T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-26 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android夜间模式实现</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/05/04/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-04T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-04 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">深入讲解WebView——下</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/05/03/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-03T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-03 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">深入讲解WebView——上</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/04/28/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-04-28T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-04-28 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">通用Adapter与ListView滚动时不加载图片的封装</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/04/12/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-04-12T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-04-12 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">仿iPhone辅助球实现</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2014/12/05/03" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-12-05T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-12-05 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android注解式绑定控件，没你想象的那么难</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2014/12/05/02" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-12-05T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-12-05 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">高效加载Bitmap</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2014/12/05/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-12-05T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-12-05 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android仿微信录音功能，自定义控件的设计技巧</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2014/09/15/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-09-15T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-09-15 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Thread并发请求封装——深入理解AsyncTask类</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2014/07/25/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-07-25T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-07-25 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">高效设置网络图片</font>
+                    </h2>
+                  
+
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="Android插件化开发">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//code/2014/10/15/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-10-15T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-10-15 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android插件化开发，运行未安装apk中的Service</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> CJFrameForAndroid的具体用法 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2014/09/15/02" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-09-15T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-09-15 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android插件化开发，初入殿堂</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 好久没有写博客了，这次准备写写我这几天的研究成果——Android插件化开发框架CJFrameForAndroid。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="心情随笔">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//stickies/2015/05/01/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-01T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-01 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">OSChina，从东涌到西涌</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 出发以前，不止一位朋友警告过我：从东涌到西涌是一段艰难的跋涉，要有心理准备。但在我的想象里，它仍然只是一段漫长的海岸线漫步而已——也许时间会久一点，五六个小时嘛，大家都这样说。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/04/01/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-04-01T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-04-01 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">致那些正在迷茫期的开发者</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 望着床头的两本书，突然有一些感想。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/03/16/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-03-16T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-03-16 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">面向时空编程</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 如果你能看到我的头脑如何思考，你就会发现，当我的眼睛看到代码或者公式的时候，我的头脑看到的并不是代码和公式，而是自动把它们翻译成了一些电路，流体导管一类的东西，它们存在于一个具有多重现实和历史的，像 Matrix 一样的世界里。这些直觉都不是从书里来的，也不是老师教的，而是通过观察身边的事物得到的。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//stickies/2014/12/26/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-12-26T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-12-26 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">2014年终总结</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 不知不觉已经连续三年了，每年给自己一个总结。第一年，写在贴吧；第二年，写在CSDN论坛；第三年以及以后，都写在自己的博客吧。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//stickies/2014/10/15/02" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2014-10-15T00:00:00+08:00">
+                    <font color="#aaaaaa">2014-10-15 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">说走就走的旅行</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 无忧无虑 无责任 说走就走，这是三个美好的词汇。然而，要想三个词同时具备，那真的很难。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="项目管理">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//manager/2015/04/05/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-04-05T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-04-05 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">项目经理初长成2——明确认知</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 作为项目经理，尤其是移动开发项目经理，有时候不得不去思考一些非技术上的东西，例如用户体验。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//manager/2015/01/12/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-01-12T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-01-12 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">软件开发</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 无意间在公司发现了《项目经理应该知道的97件事》这本书，是一个惊喜。因为很早之前曾经看过这本书的电子版，只是由于是电子版的，并没有看的那么认真。这次就捧着这本书，从新再细读一遍，顺便写一系博客记录下自己的感悟与成长之路。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="Android框架">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//code/2015/05/12/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-12T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-12 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">迄今最好的Http请求框架使用讲解</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 写给那些在用、想用、还没有用过KJFrame的朋友。 KJFrameForAndroid总共分为四个功能：Activity继承链的规范，Http数据请求和上传下载，Bitmap大图加载以及ListView滚动时只加载内存图片，数据库对象存储与集合对象存储。还有一个独立出来的功能CJFrame插件化开发框架，支持启动在你的手机中未安装的apk应用。  </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/05/10/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-10T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-10 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">使用框架帮助Activity规范化</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 写给那些在用、想用、还没有用过KJFrame的朋友。 KJFrameForAndroid总共分为四个功能：Activity继承链的规范，Http数据请求和上传下载，Bitmap大图加载以及ListView滚动时只加载内存图片，数据库对象存储与集合对象存储。还有一个独立出来的功能CJFrame插件化开发框架，支持启动在你的手机中未安装的apk应用。  </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/03/25/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-03-25T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-03-25 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">深入研究KJBitmap使用方法</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 好像最近一个月都没有写博客了，正好伴着KJFrameForAndroid更新v2.14版本，讲解一下其中Bitmap模块的深度用法。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/01/13/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-01-13T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-01-13 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Android最方便的推送框架</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 本文主要讲在Android中实现推送方式的底层原理与推送的知识及相关解决方案。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="IOS">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//code/2015/02/03/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-02-03T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-02-03 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">从Android到IOS</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 由于对于自己的C基础还算满意，花了一个月断断续续的把OC看完了，最近在看一些IOS开发的知识。从此，记录一只菜鸟IOS程序员的学习之路 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="知识点积累">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//code/2015/05/24/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-24T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-24 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">如何在Android应用程序中保存数据</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 一些日常总结的笔记与经验~  </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/02/09/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-02-09T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-02-09 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">对Android中的多图片异步加载的重新思考</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 现在想来，Android SDK把并行执行改为串行执行也并不无道理。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="产品策划">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//stickies/2015/05/16/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-16T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-16 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">网上订餐产品运营分析</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 请原谅我就这么黑了小米，不知道为什么，看到小米这个品牌就想去黑它，就觉得不爽。可能真的就是平时为MIUI做兼容的时候被折磨疯了吧。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//manager/2015/04/11/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-04-11T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-04-11 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">你会怎么样设计一个电视遥控器？</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 如果让你设计一个电视遥控器，你会怎么设计？这个题目不一定是出给设计师，难道项目负责人就可以不用思考吗。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="我的创业方案">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//stickies/2015/04/27/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-04-27T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-04-27 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">我的创业方案A——都市书吧1</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 身边一直有创业的朋友，也一直有想拉我创业的朋友，我只告诉他们还没到时间。90%的人都想过创业，但只有10%的人去做了，最后又只有这10%里面的10%成功了。我从来没有忘记过我的创业之心，在我的计划里会在25岁决定一个去留，是留在深圳还是回家创业(我不会呆在深圳或其他大城市创业，原因以后再说)，而决定这一去留的索引，很现实——就是在我25岁时的年薪。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="英语学习">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//english/2015/05/19/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-19T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-19 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">Search Engine Optimization</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> As a developer, I have to say English. On the way to learn English, I was too young too naive.  </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//english/2015/05/03/02" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-05-03T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-05-03 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">One Piece</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> As a developer, I have to say English. On the way to learn English, I was too young too naive.  </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+          <div post-cate="Kotlin开发Android">
+            
+              
+                
+              
+            
+              
+                
+                  <a href="//code/2015/08/03/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-08-03T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-08-03 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">kotlin简单项目</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 如果你真的希望深入的了解kotlin语言，可以查看英文版Kotlin语言文档，或者我的kotlin语言文档中文翻译项目KotlinDoc-cn：https://github.com/kymjs/KotlinDoc-cn </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/08/02/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-08-02T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-08-02 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">kotlin基础语法</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 如果你真的希望深入的了解kotlin语言，可以查看英文版Kotlin语言文档，或者我的kotlin语言文档中文翻译项目KotlinDoc-cn：https://github.com/kymjs/KotlinDoc-cn </font></p>
+                      
+                    
+                  </a>
+                
+              
+                
+                  <a href="//code/2015/07/22/01" class="post-list-item">
+                    <span class="entry-date date published">
+                    <time datetime="2015-07-22T00:00:00+08:00">
+                    <font color="#aaaaaa">2015-07-22 By 张涛</font>
+                    </time>
+                    </span>
+
+                    <h2>
+                    <font color="#333333">使用Kotlin开发Android</font>
+                    </h2>
+                  
+
+                    
+                      
+                        <p><font color="#666666"> 我首先声明我并没有使用Kotlin很长时间，我几乎是在学习的同时写了这些文章的。我并没有尝试任何其它的替代语言，例如Go和Scala，所以如果你是真的考虑换一种开发语言的话，我建议你去搜索一下其他人对这些语言的评价。 </font></p>
+                      
+                    
+                  </a>
+                
+              
+            
+          </div>
+        
+      </div>
+      
+
+     
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="shadow-corner-curl hidden-xs">
+      <div class="categories-list-header">
+        分类
+      </div>
+      
+      <a href="//index.html" class="categories-list-item" cate="All">
+        全部<span class="my-badge"> 35</span>
+      </a>
+
+  
+  
+     
+    <a href="javascript:;" class="categories-list-item" cate="Android技术讲解">
+      Android技术讲解 <span class="my-badge">11</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="Android插件化开发">
+      Android插件化开发 <span class="my-badge">2</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="心情随笔">
+      心情随笔 <span class="my-badge">5</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="项目管理">
+      项目管理 <span class="my-badge">2</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="Android框架">
+      Android框架 <span class="my-badge">4</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="IOS">
+      IOS <span class="my-badge">1</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="知识点积累">
+      知识点积累 <span class="my-badge">2</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="产品策划">
+      产品策划 <span class="my-badge">2</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="我的创业方案">
+      我的创业方案 <span class="my-badge">1</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="英语学习">
+      英语学习 <span class="my-badge">2</span>
+    </a>
+     
+    <a href="javascript:;" class="categories-list-item" cate="Kotlin开发Android">
+      Kotlin开发Android <span class="my-badge">3</span>
+    </a>
+    
+  
+
+    </div>
+  </div>
+</div>
+
+
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:kymjs123@gmail.com"><span class="glyphicon glyphicon-envelope"></span> kymjs123@gmail.com</a>
+        <span class="point"> · </span>
+        
+          
+          <a href="https://github.com/kymjs">
+            <span class="icon">
+              <svg viewBox="0 0 16 16">
+                <path fill="#aaa" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            Github
+            <!-- <span>kymjs</span> -->
+          </a>
+          
+          
+          <span class="point"> · </span>
+          <span><a href="//feed.xml">RSS</a></span>
+          <span class="point"> · </span>
+          <span>站务联系：766136833</span>
+          <span class="point"> · </span>
+          <span>Designed by <a href="https://github.com/Gaohaoyang">HyG</a></span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"kymjs"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    //每次在有DOM插入时触发
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>
